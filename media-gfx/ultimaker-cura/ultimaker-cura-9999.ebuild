@@ -51,6 +51,7 @@ RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
     sed 's/CURA_INSTALL_DIR/'$INSTALL_DIR'/g' -i $FILESDIR/run_ultimaker_cura.sh
+	eapply_user
 	distutils-r1_src_prepare
 }
 
