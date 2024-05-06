@@ -84,7 +84,7 @@ python_install() {
     true
 }
 
-python_configure_all() {
+python_unpack_all() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
