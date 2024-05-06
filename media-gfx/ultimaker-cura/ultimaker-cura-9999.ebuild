@@ -100,18 +100,18 @@ src_unpack() {
         eerror "Error: supported Python version is NOT specified."
     fi
     #dodoc ${DOCS}
-    keepdir "$INSTALL_DIR"
     "python${PY_UC}" -m venv "${D}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile new default --detect --force
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
-    keepdir "$INSTALL_DIR/Cura"
     git-r3_checkout
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
 python_install_all() {
+    keepdir "$INSTALL_DIR"
+    keepdir "$INSTALL_DIR/Cura"
     distutils-r1_python_install_all
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
