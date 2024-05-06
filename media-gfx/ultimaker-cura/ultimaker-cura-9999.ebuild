@@ -88,9 +88,9 @@ src_compile() {
 	true
 }
 
-python_install() {
-    true
-}
+#python_install() {
+#    true
+#}
 
 src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
@@ -120,6 +120,7 @@ python_install_all() {
     keepdir "$INSTALL_DIR"
     keepdir "$INSTALL_DIR/Cura"
     distutils-r1_python_install_all
+    emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     #${FILESDIR}/run_ultimaker_cura.sh
