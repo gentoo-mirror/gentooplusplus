@@ -93,8 +93,8 @@ src_compile() {
 python_install() {
     #true
     distutils-r1_python_install
-    keepdir "$INSTALL_DIR"
-    keepdir "$INSTALL_DIR/Cura"
+    dodir "$INSTALL_DIR"
+    dodir "$INSTALL_DIR/Cura"
     cp -Rpvf "${S}/" "${D}/"
     insinto /opt/
     doins -r opt/*
@@ -140,8 +140,8 @@ src_prepare() {
 
 python_install_all() {
     distutils-r1_python_install_all
-    keepdir "$INSTALL_DIR"
-    keepdir "$INSTALL_DIR/Cura"
+    dodir "$INSTALL_DIR"
+    dodir "$INSTALL_DIR/Cura"
     cp -Rvf "${S}/" "${D}/"
     #emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
