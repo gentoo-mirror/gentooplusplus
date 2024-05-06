@@ -124,7 +124,7 @@ python_install_all() {
     keepdir "$INSTALL_DIR"
     keepdir "$INSTALL_DIR/Cura"
     insinto "$INSTALL_DIR"
-    cp -R "${D}/" "${INSTALL_DIR}/"
+    cp -Rvf "${D}/$INSTALL_DIR/" "${INSTALL_DIR}/"
     distutils-r1_python_install_all
     #emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
