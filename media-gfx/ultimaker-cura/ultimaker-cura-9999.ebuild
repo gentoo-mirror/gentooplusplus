@@ -3,6 +3,8 @@
 
 EAPI="8"
 
+inherit cmake-multilib flag-o-matic
+
 PYTHON_COMPAT=( python3_{10..11} )
 
 MY_PN="ultimaker-cura"
