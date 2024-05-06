@@ -7,18 +7,18 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 MY_PN="ultimaker-cura"
 
-#Use the highest python version possible. If not, fallback to lower one
-PY_UC="3.11"
-PY_UC_D="3_11"
-if use python3_10 ; then
-    PY_UC="3.10"
-    PY_UC_D="3_10"
-elif use python3_11 ; then
-    PY_UC="3.11"
-    PY_UC_D="3_11"
-else
-    eerror "Error: supported Python version is NOT specified."
-fi
+##Use the highest python version possible. If not, fallback to lower one
+#PY_UC="3.11"
+#PY_UC_D="3_11"
+#if use python3_10 ; then
+    #PY_UC="3.10"
+    #PY_UC_D="3_10"
+#elif use python3_11 ; then
+    #PY_UC="3.11"
+    #PY_UC_D="3_11"
+#else
+    #eerror "Error: supported Python version is NOT specified."
+#fi
 
 CONAN_VER="1.64.0"
 CONAN_INSTALLER_CONFIG_URL="https://github.com/ultimaker/conan-config.git"
@@ -52,7 +52,7 @@ RESTRICT=""
 RDEPEND="${PYTHON_DEPS}
 =dev-lang/python-3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
-dev-python/virtualenv python_targets_python${PY_UC_D}
+dev-python/virtualenv
 dev-vcs/git"
 DEPEND="${RDEPEND}"
 BDEPEND=">=sys-devel/gcc-11"
@@ -75,6 +75,18 @@ In order to run using nvidia card - pass the parameter \"--nvidia\" to the execu
 DOCS="README.rst"
 
 python_install_all() {
+    #Use the highest python version possible. If not, fallback to lower one
+    PY_UC="3.11"
+    PY_UC_D="3_11"
+    if use python3_10 ; then
+        PY_UC="3.10"
+        PY_UC_D="3_10"
+    elif use python3_11 ; then
+        PY_UC="3.11"
+        PY_UC_D="3_11"
+    else
+        eerror "Error: supported Python version is NOT specified."
+    fi
     dodoc ${DOCS}
     distutils-r1_python_install_all
     keepdir "$INSTALL_DIR"
