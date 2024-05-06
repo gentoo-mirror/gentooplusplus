@@ -19,8 +19,7 @@ if [[ ${PV} == *9999* ]]; then
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
 else
-    SRC_URI="$(pypi_sdist_url)
-    https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.tar.gz"
+    SRC_URI="https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.tar.gz"
 fi
 
 DESCRIPTION="Ultimaker Cura - slicer for 3D printing"
