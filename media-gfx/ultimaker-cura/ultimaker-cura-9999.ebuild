@@ -59,7 +59,6 @@ INSTALL_DIR="/opt/${MY_PN}/${PV}"
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
 	eapply_user
 	distutils-r1_src_prepare
 }
@@ -112,6 +111,7 @@ python_configure() {
 
 python_install_all() {
     elog "Creating Cura launcher..."
+    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     ${FILESDIR}/run_ultimaker_cura.sh
     fperms 0755 ${FILESDIR}/${RUN_SBIN_COMMAND}
     fperms a+X ${FILESDIR}/${RUN_SBIN_COMMAND}
