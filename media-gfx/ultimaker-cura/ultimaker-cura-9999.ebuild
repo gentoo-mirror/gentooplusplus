@@ -9,19 +9,6 @@ PYTHON_COMPAT=( python3_{10..11} )
 
 MY_PN="ultimaker-cura"
 
-##Use the highest python version possible. If not, fallback to lower one
-#PY_UC="3.11"
-#PY_UC_D="3_11"
-#if use python3_10 ; then
-    #PY_UC="3.10"
-    #PY_UC_D="3_10"
-#elif use python3_11 ; then
-    #PY_UC="3.11"
-    #PY_UC_D="3_11"
-#else
-    #eerror "Error: supported Python version is NOT specified."
-#fi
-
 CONAN_VER="1.64.0"
 CONAN_INSTALLER_CONFIG_URL="https://github.com/ultimaker/conan-config.git"
 
@@ -63,7 +50,7 @@ INSTALL_DIR="/opt/${MY_PN}/${PV}"
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
-    sed 's/CURA_INSTALL_DIR/'$INSTALL_DIR'/g' -i ${FILESDIR}/run_ultimaker_cura.sh
+    sed 's/CURA_INSTALL_DIR/'$INSTALL_DIR'/g' -i $FILESDIR/run_ultimaker_cura.sh
 	distutils-r1_src_prepare
 }
 
