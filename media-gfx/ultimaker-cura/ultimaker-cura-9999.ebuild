@@ -71,9 +71,9 @@ RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 #    true
 #}
 
-python_prepare_all() {
-    distutils-r1_python_prepare_all
-}
+#python_prepare_all() {
+#    distutils-r1_python_prepare_all
+#}
 
 
 #S="${WORKDIR}"
@@ -92,7 +92,7 @@ src_compile() {
 
 python_install() {
     #true
-    distutils-r1_python_install
+    #distutils-r1_python_install
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     cp -Rpvf "${S}/" "${D}/"
@@ -130,16 +130,17 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
-src_prepare() {
+#src_prepare() {
     #for i in "${WORKDIR}"/*.patch ; do
     #    eapply "${i}"
     #done
     #eapply_user
-    distutils-r1_src_prepare
-}
+    #distutils-r1_src_prepare
+    #true
+#}
 
 python_install_all() {
-    distutils-r1_python_install_all
+    #distutils-r1_python_install_all
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     cp -Rvf "${S}/" "${D}/"
