@@ -88,9 +88,12 @@ src_compile() {
 	true
 }
 
-#python_install() {
-#    true
-#}
+python_install() {
+    keepdir "$INSTALL_DIR"
+    keepdir "$INSTALL_DIR/Cura"
+    cp -rvf "${S}/" "${D}/"
+    readme.gentoo_create_doc
+}
 
 src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
