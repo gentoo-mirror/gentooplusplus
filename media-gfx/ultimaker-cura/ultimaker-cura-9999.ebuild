@@ -75,6 +75,10 @@ src_compile() {
 	true
 }
 
+python_install() {
+    python_install_all()
+}
+
 python_install_all() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
