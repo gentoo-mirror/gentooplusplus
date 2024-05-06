@@ -62,7 +62,7 @@ Cura is installed here: ${INSTALL_DIR}
 In order to run using nvidia card - pass the parameter \"--nvidia\" to the executable.
 "
 
-DOCS="README.rst"
+#DOCS="README.rst"
 
 python_install_all() {
     #Use the highest python version possible. If not, fallback to lower one
@@ -77,7 +77,7 @@ python_install_all() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    dodoc ${DOCS}
+    #dodoc ${DOCS}
     distutils-r1_python_install_all
     keepdir "$INSTALL_DIR"
     "python${PY_UC}" -m venv "${D}/$INSTALL_DIR"
