@@ -23,7 +23,7 @@ SRC_URI=""
 INSTALL_DIR="/opt/${MY_PN}/${PV}"
 
 if [[ ${PV} == *9999* ]]; then
-    S="${WORKDIR}"
+    S="${WORKDIR}/${MY_PN}"
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
     EGIT_CHECKOUT_DIR="./Cura"
@@ -113,7 +113,7 @@ src_unpack() {
         eerror "Error: supported Python version is NOT specified."
     fi
     #dodoc ${DOCS}
-    cp -Rvf "${DISTDIR}"/ "${S}"
+    cp -Rpvf "${DISTDIR}"/ "${S}"
     "python${PY_UC}" -m venv "${S}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
