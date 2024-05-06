@@ -60,15 +60,21 @@ BDEPEND=">=sys-devel/gcc-11"
 
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
-src_prepare() {
-	eapply_user
-	distutils-r1_src_prepare
-}
+#src_prepare() {
+#	eapply_user
+#	distutils-r1_src_prepare
+#}
+
+#src_prepare() {
+#    true
+#}
 
 python_prepare_all() {
     distutils-r1_python_prepare_all
 }
 
+
+S="${WORKDIR}"
 
 DISABLE_AUTOFORMATTING=1
 DOC_CONTENTS="
