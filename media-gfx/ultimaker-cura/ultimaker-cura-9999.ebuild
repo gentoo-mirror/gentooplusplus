@@ -52,7 +52,7 @@ IUSE="python3_10 +python3_11"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
-=dev-lang/python-3.10
+dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
 dev-vcs/git"
