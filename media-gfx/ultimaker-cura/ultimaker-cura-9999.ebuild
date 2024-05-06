@@ -76,7 +76,7 @@ src_compile() {
 }
 
 python_install() {
-    python_install_all()
+    true
 }
 
 python_install_all() {
