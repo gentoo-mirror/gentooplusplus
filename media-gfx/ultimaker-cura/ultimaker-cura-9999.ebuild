@@ -20,10 +20,13 @@ PROPERTIES="live test_network"
 
 SRC_URI=""
 
+INSTALL_DIR="/opt/${MY_PN}/${PV}"
+
 if [[ ${PV} == *9999* ]]; then
     inherit git-r3
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
+    EGIT_CHECKOUT_DIR="./Cura"
 else
     SRC_URI="$(pypi_sdist_url --no-normalize)
     https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
@@ -55,7 +58,6 @@ dev-vcs/git"
 DEPEND="${RDEPEND}"
 BDEPEND=">=sys-devel/gcc-11"
 
-INSTALL_DIR="/opt/${MY_PN}/${PV}"
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
@@ -98,17 +100,19 @@ src_unpack() {
         eerror "Error: supported Python version is NOT specified."
     fi
     #dodoc ${DOCS}
-    keepdir "$INSTALL_DIR"
     "python${PY_UC}" -m venv "${D}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile new default --detect --force
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
-    keepdir "$INSTALL_DIR/Cura"
+    EGIT_CHECKOUT_DIR="${D}/$INSTALL_DIR/$EGIT_CHECKOUT_DIR"
+    git-r3_checkout
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
 python_install_all() {
+    keepdir "$INSTALL_DIR"
+    keepdir "$INSTALL_DIR/Cura"
     distutils-r1_python_install_all
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
