@@ -84,7 +84,7 @@ python_install() {
     true
 }
 
-python_unpack_all() {
+src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
@@ -98,7 +98,6 @@ python_unpack_all() {
         eerror "Error: supported Python version is NOT specified."
     fi
     #dodoc ${DOCS}
-    distutils-r1_python_install_all
     keepdir "$INSTALL_DIR"
     "python${PY_UC}" -m venv "${D}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
@@ -110,6 +109,7 @@ python_unpack_all() {
 }
 
 python_install_all() {
+    distutils-r1_python_install_all
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     #${FILESDIR}/run_ultimaker_cura.sh
