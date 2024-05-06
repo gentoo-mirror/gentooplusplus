@@ -58,6 +58,10 @@ src_prepare() {
 	distutils-r1_src_prepare
 }
 
+python_prepare_all() {
+    distutils-r1_python_prepare_all
+}
+
 
 DISABLE_AUTOFORMATTING=1
 DOC_CONTENTS="
@@ -66,6 +70,14 @@ In order to run using nvidia card - pass the parameter \"--nvidia\" to the execu
 "
 
 #DOCS="README.rst"
+
+src_compile() {
+	true
+}
+
+python_install() {
+    true
+}
 
 python_install_all() {
     #Use the highest python version possible. If not, fallback to lower one
