@@ -46,7 +46,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="python3_10 python3_11"
-REQUIRED_USE"^^ ( python3_10 python3_11)"
+REQUIRED_USE"^^ ( python3_10 python3_11 )"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
