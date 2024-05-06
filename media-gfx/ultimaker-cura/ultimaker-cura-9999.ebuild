@@ -59,7 +59,6 @@ INSTALL_DIR="/opt/${MY_PN}/${PV}"
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
 	eapply_user
 	distutils-r1_src_prepare
 }
@@ -85,7 +84,7 @@ python_install() {
     true
 }
 
-python_configure() {
+src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
@@ -99,23 +98,25 @@ python_configure() {
         eerror "Error: supported Python version is NOT specified."
     fi
     #dodoc ${DOCS}
-    distutils-r1_python_install_all
     keepdir "$INSTALL_DIR"
     "python${PY_UC}" -m venv "${D}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
-    VIRTUAL_ENV="$INSTALL_DIR" conan config install $CONAN_INSTALLER_CONFIG_URL
-    VIRTUAL_ENV="$INSTALL_DIR" conan profile new default --detect --force
-    VIRTUAL_ENV="$INSTALL_DIR" conan profile update settings.compiler.libcxx=libstdc++11 default
+    VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
+    VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile new default --detect --force
+    VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
     keepdir "$INSTALL_DIR/Cura"
-    VIRTUAL_ENV="$INSTALL_DIR" conan install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
 python_install_all() {
+    distutils-r1_python_install_all
     elog "Creating Cura launcher..."
-    ${FILESDIR}/run_ultimaker_cura.sh
+    #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
+    #${FILESDIR}/run_ultimaker_cura.sh
     fperms 0755 ${FILESDIR}/${RUN_SBIN_COMMAND}
     fperms a+X ${FILESDIR}/${RUN_SBIN_COMMAND}
     newsbin ${FILESDIR}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
+    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
     readme.gentoo_create_doc
 }
 
