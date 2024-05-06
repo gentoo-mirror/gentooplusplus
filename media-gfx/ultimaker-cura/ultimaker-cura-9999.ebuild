@@ -3,6 +3,8 @@
 
 EAPI="8"
 
+#inherit cmake-multilib flag-o-matic
+
 PYTHON_COMPAT=( python3_{10..11} )
 
 MY_PN="ultimaker-cura"
@@ -45,12 +47,12 @@ LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="python3_10 python3_11"
-REQUIRED_USE"^^ ( python3_10 python3_11)"
+IUSE="python3_10 +python3_11"
+#REQUIRED_USE"^^ ( python3_10 python3_11 )"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
-=dev-lang/python-3.10
+dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
 dev-vcs/git"
