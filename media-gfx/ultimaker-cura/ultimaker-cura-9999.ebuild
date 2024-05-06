@@ -3,24 +3,30 @@
 
 EAPI="8"
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( pypy3 python3_{10..11} )
+PYTHON_REQ_USE=""
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYPI_NO_NORMALIZE=1
 PYPI_PN="ultimaker-cura"
-inherit distutils-r1 readme.gentoo-r1
+inherit distutils-r1 pypi readme.gentoo-r1
 
 MY_PN="ultimaker-cura"
 
 CONAN_VER="1.64.0"
 CONAN_INSTALLER_CONFIG_URL="https://github.com/ultimaker/conan-config.git"
 
+PROPERTIES="live test_network"
+
+SRC_URI=""
+
 if [[ ${PV} == *9999* ]]; then
     inherit git-r3
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
 else
-    SRC_URI="https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
+    SRC_URI="$(pypi_sdist_url --no-normalize)
+    https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
 fi
 
 DESCRIPTION="Ultimaker Cura - slicer for 3D printing"
@@ -53,7 +59,7 @@ INSTALL_DIR="/opt/${MY_PN}/${PV}"
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
 src_prepare() {
-    sed 's/CURA_INSTALL_DIR/'$INSTALL_DIR'/g' -i $FILESDIR/run_ultimaker_cura.sh
+    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
 	eapply_user
 	distutils-r1_src_prepare
 }
@@ -79,7 +85,7 @@ python_install() {
     true
 }
 
-python_install_all() {
+python_configure() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
@@ -102,6 +108,9 @@ python_install_all() {
     VIRTUAL_ENV="$INSTALL_DIR" conan profile update settings.compiler.libcxx=libstdc++11 default
     keepdir "$INSTALL_DIR/Cura"
     VIRTUAL_ENV="$INSTALL_DIR" conan install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+}
+
+python_install_all() {
     elog "Creating Cura launcher..."
     ${FILESDIR}/run_ultimaker_cura.sh
     fperms 0755 ${FILESDIR}/${RUN_SBIN_COMMAND}
