@@ -95,7 +95,9 @@ python_install() {
     distutils-r1_python_install
     keepdir "$INSTALL_DIR"
     keepdir "$INSTALL_DIR/Cura"
-    cp -R "${S}/" "${D}/"
+    cp -Rpvf "${S}/" "${D}/"
+    insinto /opt/
+    doins -r opt/*
     #readme.gentoo_create_doc
 }
 
