@@ -89,10 +89,11 @@ src_compile() {
 }
 
 python_install() {
-    keepdir "$INSTALL_DIR"
-    keepdir "$INSTALL_DIR/Cura"
-    cp -rvf "${S}/" "${D}/"
-    readme.gentoo_create_doc
+    true
+    #keepdir "$INSTALL_DIR"
+    #keepdir "$INSTALL_DIR/Cura"
+    #cp -R "${S}/" "${D}/"
+    #readme.gentoo_create_doc
 }
 
 src_unpack() {
@@ -122,6 +123,8 @@ src_unpack() {
 python_install_all() {
     keepdir "$INSTALL_DIR"
     keepdir "$INSTALL_DIR/Cura"
+    insinto "$INSTALL_DIR"
+    cp -R "${D}/" "${INSTALL_DIR}/"
     distutils-r1_python_install_all
     #emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
