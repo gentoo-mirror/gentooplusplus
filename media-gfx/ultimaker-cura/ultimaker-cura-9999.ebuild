@@ -4,6 +4,7 @@
 EAPI="8"
 
 PYTHON_COMPAT=( python3_{10..11} )
+DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
 PYPI_NO_NORMALIZE=1
 PYPI_PN="ultimaker-cura"
@@ -19,7 +20,7 @@ if [[ ${PV} == *9999* ]]; then
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
 else
-    SRC_URI="https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.tar.gz"
+    SRC_URI="https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
 fi
 
 DESCRIPTION="Ultimaker Cura - slicer for 3D printing"
