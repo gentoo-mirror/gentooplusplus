@@ -1,5 +1,6 @@
 #!/bin/bash
-cd CURA_INSTALL_DIR
+#cd CURA_INSTALL_DIR
+cd /opt/ultimaker-cura/9999/
 source bin/activate
 cd Cura
 source venv/bin/activate

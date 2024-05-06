@@ -126,7 +126,7 @@ python_install_all() {
     #fperms 0755 ${FILESDIR}/run_ultimaker_cura.sh
     #fperms a+X ${FILESDIR}/run_ultimaker_cura.sh
     newsbin ${FILESDIR}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
+    #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
     readme.gentoo_create_doc
 }
 
