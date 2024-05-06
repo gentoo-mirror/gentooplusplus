@@ -26,7 +26,7 @@ if [[ ${PV} == *9999* ]]; then
     inherit git-r3
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
-    EGIT_CHECKOUT_DIR="${INSTALL_DIR}/Cura"
+    EGIT_CHECKOUT_DIR="./Cura"
 else
     SRC_URI="$(pypi_sdist_url --no-normalize)
     https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
@@ -105,6 +105,7 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile new default --detect --force
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
+    EGIT_CHECKOUT_DIR="${D}/$INSTALL_DIR/$EGIT_CHECKOUT_DIR"
     git-r3_checkout
     VIRTUAL_ENV="$INSTALL_DIR" "${D}/$INSTALL_DIR/bin/conan" install "${D}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
