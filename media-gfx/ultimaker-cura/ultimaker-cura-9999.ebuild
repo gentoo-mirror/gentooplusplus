@@ -93,8 +93,8 @@ src_compile() {
 python_install() {
     #true
     distutils-r1_python_install
-    keepdir "$INSTALL_DIR"
-    keepdir "$INSTALL_DIR/Cura"
+    dodir "$INSTALL_DIR"
+    dodir "$INSTALL_DIR/Cura"
     cp -Rpvf "${S}/" "${D}/"
     insinto /opt/
     doins -r opt/*
@@ -131,25 +131,25 @@ src_unpack() {
 }
 
 src_prepare() {
-    for i in "${WORKDIR}"/*.patch ; do
-        eapply "${i}"
-    done
-    eapply_user
+    #for i in "${WORKDIR}"/*.patch ; do
+    #    eapply "${i}"
+    #done
+    #eapply_user
     distutils-r1_src_prepare
 }
 
 python_install_all() {
     distutils-r1_python_install_all
-    keepdir "$INSTALL_DIR"
-    keepdir "$INSTALL_DIR/Cura"
+    dodir "$INSTALL_DIR"
+    dodir "$INSTALL_DIR/Cura"
     cp -Rvf "${S}/" "${D}/"
     #emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     #${FILESDIR}/run_ultimaker_cura.sh
-    #fperms 0755 ${FILESDIR}/run_ultimaker_cura.sh
-    #fperms a+X ${FILESDIR}/run_ultimaker_cura.sh
     newsbin ${FILESDIR}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
+    fperms 0755 ${RUN_SBIN_COMMAND}
+    fperms a+X ${RUN_SBIN_COMMAND}
     sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
     readme.gentoo_create_doc
 }
