@@ -131,10 +131,10 @@ src_unpack() {
 }
 
 src_prepare() {
-    for i in "${WORKDIR}"/*.patch ; do
-        eapply "${i}"
-    done
-    eapply_user
+    #for i in "${WORKDIR}"/*.patch ; do
+    #    eapply "${i}"
+    #done
+    #eapply_user
     distutils-r1_src_prepare
 }
 
