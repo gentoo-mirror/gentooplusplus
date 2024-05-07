@@ -22,14 +22,14 @@ SRC_URI=""
 
 INSTALL_DIR="/opt/${MY_PN}/${PV}"
 
+S="${WORKDIR}/${MY_PN}"
+
 if [[ ${PV} == *9999* ]]; then
-    S="${WORKDIR}/${MY_PN}"
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
-    EGIT_CHECKOUT_DIR="./Cura"
+    EGIT_CHECKOUT_DIR="${INSTALL_DIR}/Cura"
     inherit git-r3
 else
-    S=${WORKDIR}/${PN}-${P}
     SRC_URI="$(pypi_sdist_url --no-normalize)
     https://github.com/Ultimaker/Cura/archive/refs/tags/${PV}.tar.gz -> ${PV}.gh.tar.gz"
 fi
@@ -91,6 +91,8 @@ src_unpack() {
         unpack ${PV}.gh.tar.gz
     fi
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    cd "${WORKDIR}"
+    find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
 }
 
 python_install() {
