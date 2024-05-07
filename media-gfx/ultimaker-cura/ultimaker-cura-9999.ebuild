@@ -95,6 +95,7 @@ python_install() {
     #distutils-r1_python_install
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
+    find "${S}" -name '*.pth' -delete
     cp -Rpvf "${S}/" "${D}/"
     insinto /opt/
     doins -r opt/*
@@ -143,6 +144,7 @@ python_install_all() {
     #distutils-r1_python_install_all
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
+    find "${S}" -name '*.pth' -delete
     cp -Rvf "${S}/" "${D}/"
     #emake DESTDIR="${D}" install
     elog "Creating Cura launcher..."
