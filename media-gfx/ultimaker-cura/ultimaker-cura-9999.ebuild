@@ -110,8 +110,8 @@ python_install() {
     cp -Rpf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     insinto /opt/
-    cd ${D}
-    doins -r opt/*
+    #cd ${D}
+    #doins -r opt/*
     cd ${D}
     rm ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
     dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
