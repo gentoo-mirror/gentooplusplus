@@ -84,7 +84,7 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile new default --detect --force
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
-    EGIT_CHECKOUT_DIR="${S}/$INSTALL_DIR/$EGIT_CHECKOUT_DIR"
+    EGIT_CHECKOUT_DIR="${S}/$EGIT_CHECKOUT_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
@@ -92,7 +92,7 @@ src_unpack() {
     fi
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     cd "${WORKDIR}"
-    #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
+    find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
 }
 
 python_install() {
@@ -102,7 +102,7 @@ python_install() {
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     insinto /opt/
     doins -r opt/*
-    #dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
+    dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
 }
 
 python_install_all() {
