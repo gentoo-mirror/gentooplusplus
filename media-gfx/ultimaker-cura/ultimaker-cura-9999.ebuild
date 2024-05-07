@@ -92,7 +92,7 @@ src_unpack() {
     fi
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     cd "${WORKDIR}"
-    find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
+    #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
 }
 
 python_install() {
