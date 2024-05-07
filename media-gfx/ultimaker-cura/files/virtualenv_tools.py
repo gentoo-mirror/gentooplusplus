@@ -54,9 +54,13 @@ def update_activation_script(script_filename, new_path):
 
 def update_script(script_filename, new_path):
     """Updates shebang lines for actual scripts."""
-    with open(script_filename) as f:
-        lines = list(f)
-    if not lines:
+    try:
+        with open(script_filename,"r",encoding="utf8") as f:
+            lines = [line.rstrip() for line in f]
+        if not lines:
+            return
+    except UnicodeDecodeError as e:
+        #print("Error decoding file %s contents" % script_filename)
         return
 
     if not lines[0].startswith('#!'):
@@ -83,10 +87,12 @@ def update_script(script_filename, new_path):
 def update_scripts(bin_dir, new_path):
     """Updates all scripts in the bin folder."""
     for fn in os.listdir(bin_dir):
-        if fn in ACTIVATION_SCRIPTS:
-            update_activation_script(os.path.join(bin_dir, fn), new_path)
-        else:
-            update_script(os.path.join(bin_dir, fn), new_path)
+        if not os.path.isdir(os.path.join(bin_dir, fn)):
+            if fn in ACTIVATION_SCRIPTS:
+                update_activation_script(os.path.join(bin_dir, fn), new_path)
+            else:
+                if (not fn.endswith(('.pyc', '.pyo'))) and (not fn.startswith('python')):
+                    update_script(os.path.join(bin_dir, fn), new_path)
 
 
 def update_pyc(filename, new_path):
@@ -180,11 +186,14 @@ def update_paths(base, new_path):
 
     if lib_dir is None or not os.path.isdir(bin_dir) \
        or not os.path.isfile(os.path.join(bin_dir, 'python')):
-        print('error: %s does not refer to a python installation' % base)
+        print(lib_dir)
+        print(bin_dir)
+        print(os.path.join(bin_dir, 'python'))
+        print('error: base path "%s" does not refer to a python installation (new_path: %s)' % (base, new_path))
         return False
 
     update_scripts(bin_dir, new_path)
-    update_pycs(lib_dir, new_path, lib_name)
+    #update_pycs(lib_dir, new_path, lib_name)
     update_local(base, new_path)
 
     return True
@@ -245,6 +254,9 @@ def main():
                       'supported to the new python prefix.  You can also set '
                       'this to "auto" for autodetection.')
     options, paths = parser.parse_args()
+    #from pprint import pprint
+    #pprint(paths)
+    #pprint(options)
     if not paths:
         paths = ['.']
 
