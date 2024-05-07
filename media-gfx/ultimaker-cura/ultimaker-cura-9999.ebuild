@@ -103,12 +103,12 @@ python_install() {
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     insinto /opt/
     doins -r opt/*
-    rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
+    #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
-    P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
-    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python
-    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3
-    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    #P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
+    #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python
+    #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3
+    #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
 }
 
 python_install_all() {
@@ -132,6 +132,7 @@ python_install_all() {
 pkg_postinst() {
     # First of all, we have to fix the paths for parent Python environment
     "python${PY_UC}" -m venv "$INSTALL_DIR"
+    python3.10 -m venv "$INSTALL_DIR/Cura/venv"
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
     # Now, we have to update the paths in the create virtual environments
