@@ -100,7 +100,7 @@ python_install() {
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
-    dosym -r ${D}/bin/python ${D}/Cura/venv/python
+    dosym -r ${D}/${INSTALL_DIR}/bin/python ${D}/${INSTALL_DIR}/Cura/venv/python
     insinto /opt/
     doins -r opt/*
 }
