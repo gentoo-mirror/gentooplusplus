@@ -48,6 +48,7 @@ RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
 sys-apps/util-linux
+sys-apps/coreutils
 dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
@@ -97,6 +98,11 @@ src_unpack() {
 }
 
 python_install() {
+    cd "${S}/$INSTALL_DIR/Cura/"
+    source venv/bin/activate
+    CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    venv/bin/activate_deactivate
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
@@ -105,12 +111,16 @@ python_install() {
     cp -Rpvf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     insinto /opt/
     doins -r opt/*
+    cd ${D}
+    rm ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
+    dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
     #P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+
 }
 
 python_install_all() {
