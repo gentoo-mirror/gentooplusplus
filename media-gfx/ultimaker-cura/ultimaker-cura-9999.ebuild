@@ -66,16 +66,6 @@ src_compile() {
 	true
 }
 
-python_install() {
-    dodir "$INSTALL_DIR"
-    dodir "$INSTALL_DIR/Cura"
-    find "${S}" -name '*.pth' -delete
-    cp -Rpvf "${S}/" "${D}/"
-    dosym -r ${D}/bin/python ${D}/Cura/venv/python
-    insinto /opt/
-    doins -r opt/*
-}
-
 src_unpack() {
     PY_UC="3.11"
     PY_UC_D="3_11"
@@ -103,11 +93,21 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
+python_install() {
+    dodir "$INSTALL_DIR"
+    dodir "$INSTALL_DIR/Cura"
+    find "${S}" -name '*.pth' -delete
+    cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
+    dosym -r ${D}/bin/python ${D}/Cura/venv/python
+    insinto /opt/
+    doins -r opt/*
+}
+
 python_install_all() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
-    cp -Rvf "${S}/" "${D}/"
+    cp -Rvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     elog "Creating Cura launcher..."
     mkdir -p "${ED}/tmp"
     cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
