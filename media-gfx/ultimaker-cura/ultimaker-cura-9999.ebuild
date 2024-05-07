@@ -84,7 +84,7 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile new default --detect --force
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
-    EGIT_CHECKOUT_DIR="${S}/$INSTALL_DIR/$EGIT_CHECKOUT_DIR"
+    EGIT_CHECKOUT_DIR="${S}/$EGIT_CHECKOUT_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
@@ -125,9 +125,9 @@ python_install_all() {
 
 pkg_postinst() {
     # First of all, we have to fix the paths for Python
-    "python${PY_UC}" -m venv "$INSTALL_DIR"
+    #"python${PY_UC}" -m venv "$INSTALL_DIR"
     #source "$INSTALL_DIR/bin/activate"
-    "python${PY_UC}" -m venv "$INSTALL_DIR/Cura"
+    #"python${PY_UC}" -m venv "$INSTALL_DIR/Cura"
     #deactivate
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
