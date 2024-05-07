@@ -102,7 +102,7 @@ python_install() {
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     insinto /opt/
     doins -r opt/*
-    dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/python
+    dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
 }
 
 python_install_all() {
@@ -126,9 +126,9 @@ python_install_all() {
 pkg_postinst() {
     # First of all, we have to fix the paths for Python
     "python${PY_UC}" -m venv "$INSTALL_DIR"
-    source "$INSTALL_DIR/bin/activate"
+    #source "$INSTALL_DIR/bin/activate"
     python -m venv "$INSTALL_DIR/Cura"
-    deactivate
+    #deactivate
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
     # TODO: Now, we have to update the paths in the create virtual environments
