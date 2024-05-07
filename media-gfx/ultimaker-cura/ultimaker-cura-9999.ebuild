@@ -99,8 +99,10 @@ src_unpack() {
 python_install() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
+    dodir "$INSTALL_DIR/Cura/venv"
     find "${S}" -name '*.pth' -delete
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
+    cp -Rpvf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     insinto /opt/
     doins -r opt/*
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
@@ -116,6 +118,7 @@ python_install_all() {
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
+    cp -Rpvf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     elog "Creating Cura launcher..."
     mkdir -p "${ED}/tmp"
     cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
@@ -132,17 +135,21 @@ python_install_all() {
 pkg_postinst() {
     # First of all, we have to fix the paths for parent Python environment
     "python${PY_UC}" -m venv "$INSTALL_DIR"
-    python3.10 -m venv "$INSTALL_DIR/Cura/venv"
+    #python3.10 -m venv "$INSTALL_DIR/Cura/venv"
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
     # Now, we have to update the paths in the create virtual environments
     cd ${S}
     SDIR=`pwd`
+    cd ${HOME}
+    HDIR=`pwd`
     cd ${INSTALL_DIR}/bin
     #find . -type f -exec sed 's~'${SDIR}'~'${INSTALL_DIR}'~g' {} +
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/Cura/venv/bin
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    cd ${INSTALL_DIR}/Cura/venv/.conan
+    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/Cura/venv/.conan'~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
