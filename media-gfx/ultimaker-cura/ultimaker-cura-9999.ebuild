@@ -48,6 +48,7 @@ RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
 sys-apps/util-linux
+sys-apps/coreutils
 dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
@@ -79,7 +80,7 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    cp -Rpvf "${DISTDIR}"/ "${S}"
+    cp -Rpf "${DISTDIR}"/ "${S}"
     "python${PY_UC}" -m venv "${S}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
@@ -97,31 +98,40 @@ src_unpack() {
 }
 
 python_install() {
+    cd "${S}/$INSTALL_DIR/Cura/"
+    source venv/bin/activate
+    CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    venv/bin/activate_deactivate
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
     find "${S}" -name '*.pth' -delete
-    cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
-    cp -Rpvf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
+    cp -Rpf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
+    cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     insinto /opt/
     doins -r opt/*
+    cd ${D}
+    rm ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
+    dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
     #P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3
     #dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+
 }
 
 python_install_all() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
-    cp -Rvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
-    cp -Rpvf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
+    cp -Rf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
+    cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     elog "Creating Cura launcher..."
     mkdir -p "${ED}/tmp"
-    cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
+    cp -f "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
     fperms 0755 /tmp/run_ultimaker_cura.sh
     fperms a+X /tmp/run_ultimaker_cura.sh
     sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
