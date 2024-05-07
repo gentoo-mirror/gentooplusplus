@@ -150,8 +150,8 @@ python_install_all() {
     #${FILESDIR}/run_ultimaker_cura.sh
     mkdir -p "${ED}/tmp"
     cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
-    fperms 0755 run_ultimaker_cura.sh
-    fperms a+X run_ultimaker_cura.sh
+    fperms 0755 /tmp/run_ultimaker_cura.sh
+    fperms a+X /tmp/run_ultimaker_cura.sh
     sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
     newsbin "${ED}/tmp/run_ultimaker_cura.sh" ${RUN_SBIN_COMMAND}
     rm -f "${ED}/tmp/run_ultimaker_cura.sh"
