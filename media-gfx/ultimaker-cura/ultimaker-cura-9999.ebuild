@@ -148,10 +148,11 @@ python_install_all() {
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     #${FILESDIR}/run_ultimaker_cura.sh
-    newsbin ${FILESDIR}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
-    #fperms 0755 ${RUN_SBIN_COMMAND}
-    #fperms a+X ${RUN_SBIN_COMMAND}
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
+    cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${T}/"
+    fperms 0755 "${T}/run_ultimaker_cura.sh"
+    fperms a+X "${T}/run_ultimaker_cura.sh"
+    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i "${T}/run_ultimaker_cura.sh"
+    newsbin ${T}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
     readme.gentoo_create_doc
 }
 
