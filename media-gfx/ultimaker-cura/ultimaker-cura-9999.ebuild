@@ -48,8 +48,8 @@ LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="python3_10 +python3_11"
-#REQUIRED_USE"^^ ( python3_10 python3_11 )"
+IUSE="python_targets_python3_10 +python_targets_python3_11"
+#REQUIRED_USE"^^ ( python_targets_python3_10 python_targets_python3_11 )"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
@@ -105,10 +105,10 @@ src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
-    if use python3_10 ; then
+    if use python_targets_python3_10 ; then
         PY_UC="3.10"
         PY_UC_D="3_10"
-    elif use python3_11 ; then
+    elif use python_targets_python3_11 ; then
         PY_UC="3.11"
         PY_UC_D="3_11"
     else
