@@ -38,12 +38,6 @@ DESCRIPTION="Ultimaker Cura - slicer for 3D printing"
 HOMEPAGE="https://github.com/Eugeniusz-Gienek/gentoo-ultimaker-cura.git"
 #SRC_URI="https://github.com/Ultimaker/Cura.git"
 
-# Source directory; the dir where the sources can be found (automatically
-# unpacked) inside ${WORKDIR}.  The default value for S is ${WORKDIR}/${P}
-# If you don't need to change it, leave the S= line out of the ebuild
-# to keep it tidy.
-#S="${WORKDIR}/${P}"
-
 LICENSE="GPL-3"
 
 SLOT="0"
@@ -62,48 +56,26 @@ BDEPEND=">=sys-devel/gcc-11"
 
 RUN_SBIN_COMMAND="run_ultimaker_cura_${PV}"
 
-#src_prepare() {
-#	eapply_user
-#	distutils-r1_src_prepare
-#}
-
-#src_prepare() {
-#    true
-#}
-
-#python_prepare_all() {
-#    distutils-r1_python_prepare_all
-#}
-
-
-#S="${WORKDIR}"
-
 DISABLE_AUTOFORMATTING=1
 DOC_CONTENTS="
 Cura is installed here: ${INSTALL_DIR}
 In order to run using nvidia card - pass the parameter \"--nvidia\" to the executable.
 "
 
-#DOCS="README.rst"
-
 src_compile() {
 	true
 }
 
 python_install() {
-    #true
-    #distutils-r1_python_install
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rpvf "${S}/" "${D}/"
     insinto /opt/
     doins -r opt/*
-    #readme.gentoo_create_doc
 }
 
 src_unpack() {
-    #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
     if use python_targets_python3_10 ; then
@@ -115,7 +87,6 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    #dodoc ${DOCS}
     cp -Rpvf "${DISTDIR}"/ "${S}"
     "python${PY_UC}" -m venv "${S}/$INSTALL_DIR"
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
@@ -131,25 +102,14 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 }
 
-#src_prepare() {
-    #for i in "${WORKDIR}"/*.patch ; do
-    #    eapply "${i}"
-    #done
-    #eapply_user
-    #distutils-r1_src_prepare
-    #true
-#}
-
 python_install_all() {
-    #distutils-r1_python_install_all
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rvf "${S}/" "${D}/"
-    #emake DESTDIR="${D}" install
+    cp -vf "${FILESDIR}/virtualenv_tools.py" "${D}/"
+    ${D}/${INSTALL_DIR}/virtualenv_tools.py $D/${INSTALL_DIR}/Cura/venv --update-path ${INSTALL_DIR}/Cura/venv
     elog "Creating Cura launcher..."
-    #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
-    #${FILESDIR}/run_ultimaker_cura.sh
     mkdir -p "${ED}/tmp"
     cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
     fperms 0755 /tmp/run_ultimaker_cura.sh
@@ -158,8 +118,6 @@ python_install_all() {
     newsbin "${ED}/tmp/run_ultimaker_cura.sh" ${RUN_SBIN_COMMAND}
     rm -f "${ED}/tmp/run_ultimaker_cura.sh"
     rm -rf "${ED}/tmp"
-    cp -vf "${FILESDIR}/virtualenv_tools.py" "${D}/"
-    #/virtualenv_tools.py /opt/ultimaker-cura/9999/Cura/venv --reinitialize
     readme.gentoo_create_doc
 }
 
@@ -168,7 +126,6 @@ pkg_postinst() {
     rm -f ${INSTALL_DIR}/Cura/venv/bin/python*
     ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --reinitialize
     find ${INSTALL_DIR} -name '*.pyc' -delete
-    ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --update-path ${INSTALL_DIR}/Cura/venv
 	elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
