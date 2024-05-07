@@ -168,7 +168,7 @@ pkg_postinst() {
     rm -f ${INSTALL_DIR}/Cura/venv/bin/python*
     ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --reinitialize
     find ${INSTALL_DIR} -name '*.pyc' -delete
-    ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --update-path auto
+    ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --update-path ${INSTALL_DIR}/Cura/venv
 	elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
