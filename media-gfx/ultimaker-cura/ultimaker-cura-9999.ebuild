@@ -48,8 +48,8 @@ LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="python3_10 +python3_11"
-#REQUIRED_USE"^^ ( python3_10 python3_11 )"
+IUSE="python_targets_python3_10 +python_targets_python3_11"
+#REQUIRED_USE"^^ ( python_targets_python3_10 python_targets_python3_11 )"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
@@ -105,10 +105,10 @@ src_unpack() {
     #Use the highest python version possible. If not, fallback to lower one
     PY_UC="3.11"
     PY_UC_D="3_11"
-    if use python3_10 ; then
+    if use python_targets_python3_10 ; then
         PY_UC="3.10"
         PY_UC_D="3_10"
-    elif use python3_11 ; then
+    elif use python_targets_python3_11 ; then
         PY_UC="3.11"
         PY_UC_D="3_11"
     else
@@ -148,10 +148,11 @@ python_install_all() {
     elog "Creating Cura launcher..."
     #sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i $FILESDIR/run_ultimaker_cura.sh
     #${FILESDIR}/run_ultimaker_cura.sh
-    newsbin ${FILESDIR}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
-    #fperms 0755 ${RUN_SBIN_COMMAND}
-    #fperms a+X ${RUN_SBIN_COMMAND}
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i ${RUN_SBIN_COMMAND}
+    cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${T}/"
+    fperms 0755 "${T}/run_ultimaker_cura.sh"
+    fperms a+X "${T}/run_ultimaker_cura.sh"
+    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i "${T}/run_ultimaker_cura.sh"
+    newsbin ${T}/run_ultimaker_cura.sh ${RUN_SBIN_COMMAND}
     readme.gentoo_create_doc
 }
 
