@@ -102,7 +102,7 @@ python_install() {
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
     CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
-    venv/bin/activate_deactivate
+    "${S}/$INSTALL_DIR/Cura/venv/bin/activate_deactivate"
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
