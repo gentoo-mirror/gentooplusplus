@@ -3,7 +3,7 @@
 
 EAPI="8"
 
-PYTHON_COMPAT=( pypy3 python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE=""
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
@@ -47,6 +47,7 @@ IUSE="python_targets_python3_10 +python_targets_python3_11"
 RESTRICT=""
 
 RDEPEND="${PYTHON_DEPS}
+sys-apps/util-linux
 dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
@@ -102,7 +103,12 @@ python_install() {
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     insinto /opt/
     doins -r opt/*
-    dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
+    rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
+    # Here we have to have.... Python 3.10
+    P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
+    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python
+    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python3
+    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python3.10
 }
 
 python_install_all() {
@@ -124,18 +130,18 @@ python_install_all() {
 
 
 pkg_postinst() {
-    # First of all, we have to fix the paths for Python
+    # First of all, we have to fix the paths for parent Python environment
     "python${PY_UC}" -m venv "$INSTALL_DIR"
-    #source "$INSTALL_DIR/bin/activate"
-    "python${PY_UC}" -m venv "$INSTALL_DIR/Cura"
-    #deactivate
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
-    # TODO: Now, we have to update the paths in the create virtual environments
+    # Now, we have to update the paths in the create virtual environments
+    cd ${S}
+    SDIR=`pwd`
     cd ${INSTALL_DIR}/bin
-    #find . -type f -exec sed 's~'${S}'~'${INSTALL_DIR}'~g' {} +
-    find . -type f -exec sed -i 's~'${S}'~''~g' {} +
-    cd ${INSTALL_DIR}
+    #find . -type f -exec sed 's~'${SDIR}'~'${INSTALL_DIR}'~g' {} +
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    cd ${INSTALL_DIR}/Cura/venv/bin
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
