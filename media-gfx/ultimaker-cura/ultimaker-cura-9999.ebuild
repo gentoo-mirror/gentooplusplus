@@ -125,9 +125,9 @@ python_install_all() {
 
 pkg_postinst() {
     # First of all, we have to fix the paths for Python
-    "python${PY_UC}" -m venv "$INSTALL_DIR"
+    #"python${PY_UC}" -m venv "$INSTALL_DIR"
     #source "$INSTALL_DIR/bin/activate"
-    "python${PY_UC}" -m venv "$INSTALL_DIR/Cura"
+    #"python${PY_UC}" -m venv "$INSTALL_DIR/Cura"
     #deactivate
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
