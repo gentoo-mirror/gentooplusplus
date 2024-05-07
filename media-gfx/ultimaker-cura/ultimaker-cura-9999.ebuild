@@ -106,9 +106,9 @@ python_install() {
     rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
     P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
-    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python
-    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python3
-    dosym -r P3_10_INTERPRETER ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python
+    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3
+    dosym ${P3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
 }
 
 python_install_all() {
