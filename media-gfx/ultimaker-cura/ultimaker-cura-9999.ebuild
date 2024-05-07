@@ -102,7 +102,7 @@ python_install() {
     cp -Rpvf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     insinto /opt/
     doins -r opt/*
-    dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
+    #dosym -r ${INSTALL_DIR}/bin/python ${INSTALL_DIR}/Cura/venv/bin/python
 }
 
 python_install_all() {
