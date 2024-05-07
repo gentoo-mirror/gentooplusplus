@@ -71,6 +71,7 @@ python_install() {
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rpvf "${S}/" "${D}/"
+    dosym -r ${D}/bin/python ${D}/Cura/venv/python
     insinto /opt/
     doins -r opt/*
 }
@@ -107,8 +108,6 @@ python_install_all() {
     dodir "$INSTALL_DIR/Cura"
     find "${S}" -name '*.pth' -delete
     cp -Rvf "${S}/" "${D}/"
-    cp -vf "${FILESDIR}/virtualenv_tools.py" "${D}/"
-    ${D}/${INSTALL_DIR}/virtualenv_tools.py $D/${INSTALL_DIR}/Cura/venv --update-path ${INSTALL_DIR}/Cura/venv
     elog "Creating Cura launcher..."
     mkdir -p "${ED}/tmp"
     cp -vf "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
@@ -123,11 +122,20 @@ python_install_all() {
 
 
 pkg_postinst() {
-    rm -f ${INSTALL_DIR}/Cura/venv/bin/python*
-    ${INSTALL_DIR}/virtualenv_tools.py ${INSTALL_DIR}/Cura/venv --reinitialize
+    # First of all, we have to fix the paths for Python
+    "python${PY_UC}" -m venv "$INSTALL_DIR"
+    source "$INSTALL_DIR/bin/activate"
+    python -m venv "$INSTALL_DIR/Cura"
+    deactivate
+    # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
-	elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
-	elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
+    # TODO: Now, we have to update the paths in the create virtual environments
+    cd ${INSTALL_DIR}/bin
+    #find . -type f -exec sed 's~'${S}'~'${INSTALL_DIR}'~g' {} +
+    find . -type f -exec sed -i 's~'${S}'~''~g' {} +
+    cd ${INSTALL_DIR}/Cura/venv
+	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
+	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
 	elog ""
 	elog "In order to run it, please use the command \"${RUN_SBIN_COMMAND}\""

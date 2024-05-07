@@ -21,6 +21,7 @@ from types import CodeType
 
 ACTIVATION_SCRIPTS = [
     'activate',
+    'deactivate_activate',
     'activate.csh',
     'activate.fish'
 ]
