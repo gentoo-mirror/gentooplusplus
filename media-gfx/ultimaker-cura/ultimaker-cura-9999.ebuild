@@ -80,23 +80,23 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    cp -Rpf "${DISTDIR}"/ "${T}"
-    "python${PY_UC}" -m venv "${T}/$INSTALL_DIR"
-    VIRTUAL_ENV="$INSTALL_DIR" "${T}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
-    VIRTUAL_ENV="$INSTALL_DIR" "${T}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
-    VIRTUAL_ENV="$INSTALL_DIR" "${T}/$INSTALL_DIR/bin/conan" profile new default --detect --force
-    VIRTUAL_ENV="$INSTALL_DIR" "${T}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
-    EGIT_CHECKOUT_DIR="${T}/$EGIT_CHECKOUT_DIR"
+    cp -Rpf "${DISTDIR}"/ "${S}"
+    "python${PY_UC}" -m venv "${S}/$INSTALL_DIR"
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile new default --detect --force
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
+    EGIT_CHECKOUT_DIR="${S}/$EGIT_CHECKOUT_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
         unpack ${PV}.gh.tar.gz
     fi
-    VIRTUAL_ENV="$INSTALL_DIR" "${T}/$INSTALL_DIR/bin/conan" install "${T}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
-    find "${T}" -name '*.pth' -delete
-    cp -Rpf "${T}/opt" "${S}/opt"
+    find "${S}" -name '*.pth' -delete
+    #cp -Rpf "${T}/opt" "${S}/opt"
 }
 
 python_install() {
@@ -108,18 +108,19 @@ python_install() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
+    dodir "$INSTALL_DIR/Cura/venv/.conan"
     dodir "$INSTALL_DIR/Cura/venv/bin"
     #find "${T}" -name '*.pth' -delete
-    cp -Rpf "${S}/$INSTALL_DIR" "${S}/$INSTALL_DIR"
+    #cp -Rpf "${S}/$INSTALL_DIR" "${S}/$INSTALL_DIR"
     cp -Rpf "${HOME}/.conan" "${S}/$INSTALL_DIR/Cura/venv/.conan"
     cd ${D}
     #insinto /opt/
     #doins -r opt/*
-    cd "${T}/$INSTALL_DIR/Cura/"
+    cd "${S}/$INSTALL_DIR/Cura/"
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
-    CP3_10_INTERPRETER=`realpath -s --relative-to=${T} ${CP3_10_INTERPRETER_ABS}`
-    source ${T}/$INSTALL_DIR/Cura/venv/bin/deactivate_activate
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    source ${S}/$INSTALL_DIR/Cura/venv/bin/deactivate_activate
     rm -f ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
     dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
@@ -159,13 +160,15 @@ pkg_postinst() {
     # Now, we have to update the paths in the create virtual environments
     cd ${T}
     TDIR=`pwd`
+    cd ${S}
+    SDIR=`pwd`
     cd ${HOME}
     HDIR=`pwd`
     cd ${INSTALL_DIR}/bin
     #find . -type f -exec sed 's~'${TDIR}'~'${INSTALL_DIR}'~g' {} +
-    find . -type f -exec sed -i 's~'${TDIR}'~''~g' {} +
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/Cura/venv/bin
-    find . -type f -exec sed -i 's~'${TDIR}'~''~g' {} +
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/Cura/venv/.conan
     find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/Cura/venv/'~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
