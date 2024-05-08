@@ -99,10 +99,10 @@ src_unpack() {
         unpack ${PV}.gh.tar.gz
     fi
     #cd "${S}$INSTALL_DIR/Cura"
-    if [ ! -d "${S}${EGIT_CHECKOUT_DIR}" ]; then
-        die "Cannot get to the git checkout directory: ${S}${EGIT_CHECKOUT_DIR}"
+    if [ ! -d "${EGIT_CHECKOUT_DIR}" ]; then
+        die "Cannot get to the git checkout directory: ${EGIT_CHECKOUT_DIR}"
     fi
-    cd "${S}${EGIT_CHECKOUT_DIR}"
+    cd "${EGIT_CHECKOUT_DIR}"
     conan install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
