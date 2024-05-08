@@ -17,9 +17,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
 
-# overly strict requirements?
-# https://github.com/conan-io/conan/blob/develop/conans/requirements.txt
-# https://github.com/conan-io/conan/blob/develop/conans/requirements_server.txt
 RDEPEND="
 	>=dev-python/bottle-0.12.8[${PYTHON_USEDEP}]
 	<dev-python/bottle-0.13[${PYTHON_USEDEP}]
@@ -52,14 +49,8 @@ RDEPEND="
 	<dev-python/urllib3-1.27[${PYTHON_USEDEP}]
 "
 
-# Try to fix it if you're brave enough
-# Conan requires noumerous external toolchain dependencies with restricted
-# versions and cannot be managable outside of a pure CI environment.
 RESTRICT="test"
 
-PATCHES=(
-	"${FILESDIR}/${P}_nodesemver.patch"
-)
 
 src_prepare() {
 	default
