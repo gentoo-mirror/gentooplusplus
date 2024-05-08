@@ -22,6 +22,7 @@ https://github.com/conan-io/${PN}/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+S="${WORKDIR}"
 
 # overly strict requirements?
 # https://github.com/conan-io/conan/blob/develop/conans/requirements.txt
