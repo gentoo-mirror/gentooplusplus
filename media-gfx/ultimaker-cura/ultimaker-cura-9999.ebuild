@@ -95,6 +95,7 @@ src_unpack() {
     VIRTUAL_ENV="$INSTALL_DIR" "${S}/$INSTALL_DIR/bin/conan" install "${S}/$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
+    cd "${S}"
     find "${S}" -name '*.pth' -delete
     #cp -Rpf "${T}/opt" "${S}/opt"
 }
@@ -111,11 +112,11 @@ python_install() {
     dodir "$INSTALL_DIR/Cura/venv/.conan"
     dodir "$INSTALL_DIR/Cura/venv/bin"
     #find "${T}" -name '*.pth' -delete
-    #cp -Rpf "${S}/$INSTALL_DIR" "${S}/$INSTALL_DIR"
-    cp -Rpf "${HOME}/.conan" "${S}/$INSTALL_DIR/Cura/venv/.conan"
+    #cp -Rpf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     cd ${D}
-    #insinto /opt/
-    #doins -r opt/*
+    insinto /opt/
+    doins -r opt/*
+    cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     cd "${S}/$INSTALL_DIR/Cura/"
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
