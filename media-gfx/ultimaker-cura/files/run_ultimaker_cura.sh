@@ -1,7 +1,7 @@
 #!/bin/bash
 cd CURA_INSTALL_DIR
-source bin/activate
-cd Cura
+#source bin/activate
+#cd Cura
 source venv/bin/activate
 nv=0
 while test $# -gt 0
