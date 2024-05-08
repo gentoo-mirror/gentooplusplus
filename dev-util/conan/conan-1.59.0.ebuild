@@ -3,11 +3,14 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="sqlite"
+DISTUTILS_EXT=1
+DISTUTILS_USE_PEP517=setuptools
+PYPI_NO_NORMALIZE=1
+PYPI_PN="conan"
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Distributed C/C++ package manager"
 HOMEPAGE="https://conan.io/"
