@@ -106,15 +106,16 @@ python_install() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
+    dodir "$INSTALL_DIR/Cura/venv/bin"
     find "${S}" -name '*.pth' -delete
     cp -Rpf "${S}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
-    insinto /opt/
-    #cd ${D}
-    #doins -r opt/*
     cd ${D}
-    rm ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
-    dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    insinto /opt/
+    doins -r opt/*
+    cd ${D}
+    rm -f ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
+    #dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
     #P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
