@@ -156,15 +156,15 @@ pkg_postinst() {
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
     # Now, we have to update the paths in the create virtual environments
-    cd ${S}
-    SDIR=`pwd`
+    cd ${T}
+    TDIR=`pwd`
     cd ${HOME}
     HDIR=`pwd`
     cd ${INSTALL_DIR}/bin
-    #find . -type f -exec sed 's~'${SDIR}'~'${INSTALL_DIR}'~g' {} +
-    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    #find . -type f -exec sed 's~'${TDIR}'~'${INSTALL_DIR}'~g' {} +
+    find . -type f -exec sed -i 's~'${TDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/Cura/venv/bin
-    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    find . -type f -exec sed -i 's~'${TDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/Cura/venv/.conan
     find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/Cura/venv/.conan'~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
