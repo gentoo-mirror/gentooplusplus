@@ -3,26 +3,19 @@
 
 EAPI=8
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..11} )
 PYTHON_REQ_USE="sqlite"
-DISTUTILS_EXT=1
-DISTUTILS_USE_PEP517=setuptools
-PYPI_NO_NORMALIZE=1
-PYPI_PN="conan"
 
-inherit distutils-r1 pypi
-
-PROPERTIES="live test_network"
+inherit distutils-r1
 
 DESCRIPTION="Distributed C/C++ package manager"
 HOMEPAGE="https://conan.io/"
-SRC_URI="$(pypi_sdist_url --no-normalize)
-https://github.com/conan-io/${PN}/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/conan-io/${PN}/archive/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-S="${WORKDIR}"
 
 # overly strict requirements?
 # https://github.com/conan-io/conan/blob/develop/conans/requirements.txt
@@ -51,9 +44,9 @@ RDEPEND="
 # versions and cannot be managable outside of a pure CI environment.
 RESTRICT="test"
 
-#PATCHES=(
-#	"${FILESDIR}/${P}_nodesemver.patch"
-#)
+PATCHES=(
+	"${FILESDIR}/${P}_nodesemver.patch"
+)
 
 src_prepare() {
 	default
