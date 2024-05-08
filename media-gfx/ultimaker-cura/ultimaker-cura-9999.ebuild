@@ -112,7 +112,7 @@ python_install() {
     cp -Rpf "${T}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
     cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     cd ${D}
-    insinto /opt/
+    #insinto /opt/
     #doins -r opt/*
     cd "${T}/$INSTALL_DIR/Cura/"
     source venv/bin/activate
