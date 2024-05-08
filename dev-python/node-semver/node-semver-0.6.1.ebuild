@@ -28,7 +28,7 @@ BDEPEND="
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )
 "
 
-S="${WORKDIR}/python-semver-${PV}"
+S="${WORKDIR}/python-node-semver-${PV}"
 
 python_test() {
 	# Ignore 2 tests that fail with Python 2
