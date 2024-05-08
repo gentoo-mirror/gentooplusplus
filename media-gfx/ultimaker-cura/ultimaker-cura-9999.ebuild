@@ -98,11 +98,11 @@ src_unpack() {
 }
 
 python_install() {
-    cd "${S}/$INSTALL_DIR/Cura/"
-    source venv/bin/activate
-    CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
-    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
-    source ${S}/$INSTALL_DIR/Cura/venv/bin/deactivate_activate
+    #cd "${S}/$INSTALL_DIR/Cura/"
+    #source venv/bin/activate
+    #CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
+    #CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    #source ${S}/$INSTALL_DIR/Cura/venv/bin/deactivate_activate
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
@@ -113,9 +113,13 @@ python_install() {
     cd ${D}
     insinto /opt/
     doins -r opt/*
-    cd ${D}
+    cd "${D}/$INSTALL_DIR/Cura/"
+    source venv/bin/activate
+    CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    source ${S}/$INSTALL_DIR/Cura/venv/bin/deactivate_activate
     rm -f ${D}/${INSTALL_DIR}/Cura/venv/bin/python3.10
-    #dosym -r ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
     #rm -vf ${INSTALL_DIR}/Cura/venv/bin/python*
     # Here we have to have.... Python 3.10
     #P3_10_INTERPRETER=`whereis python3.10 | awk '{print $2}'`
