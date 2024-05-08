@@ -92,7 +92,8 @@ src_unpack() {
     else
         unpack ${PV}.gh.tar.gz
     fi
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" install "${S}$INSTALL_DIR/Cura" --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    cd "${S}$INSTALL_DIR/Cura"
+    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
     cd "${S}"
@@ -104,14 +105,13 @@ python_install() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/Cura"
     dodir "$INSTALL_DIR/Cura/venv"
-    dodir "$INSTALL_DIR/Cura/venv/.conan"
     dodir "$INSTALL_DIR/Cura/venv/bin"
     cd ${D}
-    cp -Rpf "${S}$INSTALL_DIR" "${D}$INSTALL_DIR"
+    cp -Rpf "${S}/" "${D}/"
     cd ${D}
     #insinto /opt/
     #doins -r opt/*
-    cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/Cura/venv/.conan"
+    cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/Cura/venv"
     cd "${S}/$INSTALL_DIR/Cura/"
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
