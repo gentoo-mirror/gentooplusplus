@@ -1,3 +1,4 @@
+dev-python/node-semver 0.6.1: Python version of node-semver, the semantic versioner for npm
 dev-util/conan 1.64.0: Distributed C/C++ package manager
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 x11-misc/xfe 1.44 1.45 1.46: MS-Explorer-like minimalist file manager for X
