@@ -54,7 +54,7 @@ dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
 dev-vcs/git
-dev-python/node-semver:0.6.1
+=dev-python/node-semver-0.6.1
 dev-util/conan:1.64.0"
 DEPEND="${RDEPEND}"
 BDEPEND=">=sys-devel/gcc-11"
