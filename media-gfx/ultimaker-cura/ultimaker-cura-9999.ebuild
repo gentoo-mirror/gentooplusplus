@@ -83,20 +83,23 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    cp -Rpf "${DISTDIR}/opt" "${S}"
+    #cp -Rpf "${DISTDIR}/opt" "${S}"
     #"python${PY_UC}" -m venv "${S}$INSTALL_DIR"
     #VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
+    cd "${S}"
+    dodir "${INSTALL_DIR}"
+    cd "${S}${INSTALL_DIR}"
     conan config install $CONAN_INSTALLER_CONFIG_URL
     conan profile new default --detect --force
     conan profile update settings.compiler.libcxx=libstdc++11 default
-    EGIT_CHECKOUT_DIR="${S}$EGIT_CHECKOUT_DIR"
+    EGIT_CHECKOUT_DIR="${S}$INSTALL_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
         unpack ${PV}.gh.tar.gz
     fi
     #cd "${S}$INSTALL_DIR/Cura"
-    cd "${S}$INSTALL_DIR"
+    cd "${EGIT_CHECKOUT_DIR}"
     conan install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
