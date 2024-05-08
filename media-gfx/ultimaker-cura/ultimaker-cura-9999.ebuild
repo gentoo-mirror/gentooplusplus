@@ -104,7 +104,7 @@ python_install() {
     dodir "$INSTALL_DIR/venv"
     dodir "$INSTALL_DIR/venv/bin"
     cd ${D}
-    cp -Rpf "${S}/" "${D}/"
+    cp -Rpf "${S}/opt" "${D}/"
     cd ${D}
     cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/venv"
     cd "${S}/$INSTALL_DIR/"
