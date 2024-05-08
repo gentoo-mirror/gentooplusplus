@@ -51,9 +51,9 @@ RDEPEND="
 # versions and cannot be managable outside of a pure CI environment.
 RESTRICT="test"
 
-PATCHES=(
-	"${FILESDIR}/${P}_nodesemver.patch"
-)
+#PATCHES=(
+#	"${FILESDIR}/${P}_nodesemver.patch"
+#)
 
 src_prepare() {
 	default
