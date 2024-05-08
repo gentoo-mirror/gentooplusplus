@@ -82,10 +82,10 @@ src_unpack() {
     fi
     cp -Rpf "${DISTDIR}"/ "${S}"
     "python${PY_UC}" -m venv "${S}$INSTALL_DIR"
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile new default --detect --force
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
+    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
+    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
+    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile new default --detect --force
+    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
     EGIT_CHECKOUT_DIR="${S}$EGIT_CHECKOUT_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
@@ -93,7 +93,7 @@ src_unpack() {
         unpack ${PV}.gh.tar.gz
     fi
     cd "${S}$INSTALL_DIR/Cura"
-    VIRTUAL_ENV="$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
     cd "${S}"
