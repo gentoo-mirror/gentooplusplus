@@ -52,7 +52,8 @@ sys-apps/coreutils
 dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
-dev-vcs/git"
+dev-vcs/git
+<dev-util/conan-2.0.0"
 DEPEND="${RDEPEND}"
 BDEPEND=">=sys-devel/gcc-11"
 
