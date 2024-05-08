@@ -87,8 +87,8 @@ src_unpack() {
     #"python${PY_UC}" -m venv "${S}$INSTALL_DIR"
     #VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     #cd "${S}"
-    dodir "${INSTALL_DIR}"
-    cd "./${INSTALL_DIR}"
+    #dodir "${INSTALL_DIR}"
+    #cd "./${INSTALL_DIR}"
     conan config install $CONAN_INSTALLER_CONFIG_URL
     conan profile new default --detect --force
     conan profile update settings.compiler.libcxx=libstdc++11 default
@@ -99,7 +99,10 @@ src_unpack() {
         unpack ${PV}.gh.tar.gz
     fi
     #cd "${S}$INSTALL_DIR/Cura"
-    cd "${EGIT_CHECKOUT_DIR}"
+    if [ ! -d "${S}${EGIT_CHECKOUT_DIR}" ]; then
+        die "Cannot get to the git checkout directory: ${S}${EGIT_CHECKOUT_DIR}"
+    fi
+    cd "${S}${EGIT_CHECKOUT_DIR}"
     conan install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
