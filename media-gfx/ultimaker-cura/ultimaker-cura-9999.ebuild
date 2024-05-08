@@ -112,7 +112,7 @@ python_install() {
     cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
     cd ${D}
     insinto /opt/
-    doins -r opt/*
+    #doins -r opt/*
     cd "${D}/$INSTALL_DIR/Cura/"
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
