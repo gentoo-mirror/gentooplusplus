@@ -27,7 +27,8 @@ S="${WORKDIR}"
 if [[ ${PV} == *9999* ]]; then
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
     EGIT_BRANCH="main"
-    EGIT_CHECKOUT_DIR="${INSTALL_DIR}/Cura"
+    #EGIT_CHECKOUT_DIR="${INSTALL_DIR}/Cura"
+    EGIT_CHECKOUT_DIR="${INSTALL_DIR}/"
     inherit git-r3
 else
     SRC_URI="$(pypi_sdist_url --no-normalize)
@@ -53,6 +54,7 @@ dev-lang/python:3.10
 || ( dev-lang/python:3.10 dev-lang/python:3.11 )
 dev-python/virtualenv
 dev-vcs/git
+>=dev-util/conan-1.64.0
 <dev-util/conan-2.0.0"
 DEPEND="${RDEPEND}"
 BDEPEND=">=sys-devel/gcc-11"
@@ -81,20 +83,21 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    cp -Rpf "${DISTDIR}"/ "${S}"
-    "python${PY_UC}" -m venv "${S}$INSTALL_DIR"
-    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
-    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" config install $CONAN_INSTALLER_CONFIG_URL
-    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile new default --detect --force
-    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" profile update settings.compiler.libcxx=libstdc++11 default
+    cp -Rpf "${DISTDIR}/opt" "${S}"
+    #"python${PY_UC}" -m venv "${S}$INSTALL_DIR"
+    #VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
+    conan config install $CONAN_INSTALLER_CONFIG_URL
+    conan profile new default --detect --force
+    conan profile update settings.compiler.libcxx=libstdc++11 default
     EGIT_CHECKOUT_DIR="${S}$EGIT_CHECKOUT_DIR"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
         unpack ${PV}.gh.tar.gz
     fi
-    cd "${S}$INSTALL_DIR/Cura"
-    VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/conan" install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+    #cd "${S}$INSTALL_DIR/Cura"
+    cd "${S}$INSTALL_DIR"
+    conan install ./ --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
     cd "${S}"
@@ -104,22 +107,29 @@ src_unpack() {
 
 python_install() {
     dodir "$INSTALL_DIR"
-    dodir "$INSTALL_DIR/Cura"
-    dodir "$INSTALL_DIR/Cura/venv"
-    dodir "$INSTALL_DIR/Cura/venv/bin"
+    #dodir "$INSTALL_DIR/Cura"
+    #dodir "$INSTALL_DIR/Cura/venv"
+    #dodir "$INSTALL_DIR/Cura/venv/bin"
+    dodir "$INSTALL_DIR/venv"
+    dodir "$INSTALL_DIR/venv/bin"
     cd ${D}
     cp -Rpf "${S}/" "${D}/"
     cd ${D}
     #insinto /opt/
     #doins -r opt/*
-    cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/Cura/venv"
-    cd "${S}/$INSTALL_DIR/Cura/"
+    #cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/Cura/venv"
+    cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/venv"
+    #cd "${S}/$INSTALL_DIR/Cura/"
+    cd "${S}/$INSTALL_DIR/"
     source venv/bin/activate
     CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
     CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
-    source ${S}$INSTALL_DIR/Cura/venv/bin/deactivate_activate
-    rm -f ${D}${INSTALL_DIR}/Cura/venv/bin/python3.10
-    dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    #source ${S}$INSTALL_DIR/Cura/venv/bin/deactivate_activate
+    source ${S}$INSTALL_DIR/venv/bin/deactivate_activate
+    #rm -f ${D}${INSTALL_DIR}/Cura/venv/bin/python3.10
+    rm -f ${D}${INSTALL_DIR}/venv/bin/python3.10
+    #dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/Cura/venv/bin/python3.10
+    dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/venv/bin/python3.10
 }
 
 python_install_all() {
@@ -137,8 +147,8 @@ python_install_all() {
 
 
 pkg_postinst() {
-    # First of all, we have to fix the paths for parent Python environment
-    "python${PY_UC}" -m venv "$INSTALL_DIR"
+    ## First of all, we have to fix the paths for parent Python environment
+    #"python${PY_UC}" -m venv "$INSTALL_DIR"
     #python3.10 -m venv "$INSTALL_DIR/Cura/venv"
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${INSTALL_DIR} -name '*.pyc' -delete
@@ -149,13 +159,16 @@ pkg_postinst() {
     SDIR=`pwd`
     cd ${HOME}
     HDIR=`pwd`
-    cd ${INSTALL_DIR}/bin
-    #find . -type f -exec sed 's~'${TDIR}'~'${INSTALL_DIR}'~g' {} +
+    #cd ${INSTALL_DIR}/bin
+    ##find . -type f -exec sed 's~'${TDIR}'~'${INSTALL_DIR}'~g' {} +
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
-    cd ${INSTALL_DIR}/Cura/venv/bin
+    #cd ${INSTALL_DIR}/Cura/venv/bin
+    cd ${INSTALL_DIR}/venv/bin
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
-    cd ${INSTALL_DIR}/Cura/venv/.conan
-    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/Cura/venv/'~g' {} +
+    #cd ${INSTALL_DIR}/Cura/venv/.conan
+    cd ${INSTALL_DIR}/venv/.conan
+    #find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/Cura/venv/'~g' {} +
+    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
