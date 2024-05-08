@@ -22,7 +22,7 @@ SRC_URI=""
 
 INSTALL_DIR="/opt/${MY_PN}/${PV}"
 
-S="${WORKDIR}/${MY_PN}"
+S="${WORKDIR}"
 
 if [[ ${PV} == *9999* ]]; then
     EGIT_REPO_URI="https://github.com/Ultimaker/Cura.git"
@@ -96,6 +96,7 @@ src_unpack() {
     #cd "${WORKDIR}"
     #find ./ -mindepth 1 ! -regex '^./'${MY_PN}'\(/.*\)?' -delete
     find "${T}" -name '*.pth' -delete
+    cp -Rpf "${T}/opt" "${S}/opt"
 }
 
 python_install() {
@@ -109,8 +110,8 @@ python_install() {
     dodir "$INSTALL_DIR/Cura/venv"
     dodir "$INSTALL_DIR/Cura/venv/bin"
     #find "${T}" -name '*.pth' -delete
-    cp -Rpf "${T}/$INSTALL_DIR" "${D}/$INSTALL_DIR"
-    cp -Rpf "${HOME}/.conan" "${D}/$INSTALL_DIR/Cura/venv/.conan"
+    cp -Rpf "${S}/$INSTALL_DIR" "${S}/$INSTALL_DIR"
+    cp -Rpf "${HOME}/.conan" "${S}/$INSTALL_DIR/Cura/venv/.conan"
     cd ${D}
     #insinto /opt/
     #doins -r opt/*
