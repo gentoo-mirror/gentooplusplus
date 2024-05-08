@@ -83,7 +83,7 @@ src_unpack() {
     else
         eerror "Error: supported Python version is NOT specified."
     fi
-    cp -Rpf "${DISTDIR}"/ "${S}"
+    cp -Rpf "${DISTDIR}/opt" "${S}"
     #"python${PY_UC}" -m venv "${S}$INSTALL_DIR"
     #VIRTUAL_ENV="${S}$INSTALL_DIR" "${S}$INSTALL_DIR/bin/python3" -m pip --no-cache-dir --quiet install conan==$CONAN_VER
     conan config install $CONAN_INSTALLER_CONFIG_URL
