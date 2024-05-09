@@ -105,7 +105,7 @@ python_install() {
     dodir "${INSTALL_DIR}/venv/bin"
     cd ${S}${INSTALL_DIR}/venv/bin
     CP3_10_INTERPRETER_ABS="$(realpath ./python3.10)"
-    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${PORTAGE_BUILDDIR} ${CP3_10_INTERPRETER_ABS}`
     cd ${D}
     cp -Rpf "${S}/opt" "${D}/"
     cd ${D}
@@ -113,18 +113,6 @@ python_install() {
     cd "${S}/${INSTALL_DIR}/"
     rm -f ${D}${INSTALL_DIR}/venv/bin/python3.10
     dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/venv/bin/python3.10
-}
-
-python_install_all() {
-    elog "Creating Cura launcher..."
-    mkdir -p "${ED}/tmp"
-    cp -f "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
-    fperms 0755 /tmp/run_ultimaker_cura.sh
-    fperms a+X /tmp/run_ultimaker_cura.sh
-    sed 's~CURA_INSTALL_DIR~'${INSTALL_DIR}'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
-    newsbin "${ED}/tmp/run_ultimaker_cura.sh" ${RUN_SBIN_COMMAND}
-    rm -f "${ED}/tmp/run_ultimaker_cura.sh"
-    rm -rf "${ED}/tmp"
     # Now, we have to update the paths in the created virtual environment
     cd ${T}
     TDIR=`$(pwd)`
@@ -144,6 +132,18 @@ python_install_all() {
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
     # We'll NOT update pyc-files, they will auto-generate anyways.
     find ${D}${INSTALL_DIR} -name '*.pyc' -delete
+}
+
+python_install_all() {
+    elog "Creating Cura launcher..."
+    mkdir -p "${ED}/tmp"
+    cp -f "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
+    fperms 0755 /tmp/run_ultimaker_cura.sh
+    fperms a+X /tmp/run_ultimaker_cura.sh
+    sed 's~CURA_INSTALL_DIR~'${INSTALL_DIR}'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
+    newsbin "${ED}/tmp/run_ultimaker_cura.sh" ${RUN_SBIN_COMMAND}
+    rm -f "${ED}/tmp/run_ultimaker_cura.sh"
+    rm -rf "${ED}/tmp"
     readme.gentoo_create_doc
 }
 
