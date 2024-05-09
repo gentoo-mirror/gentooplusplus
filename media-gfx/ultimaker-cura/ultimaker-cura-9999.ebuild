@@ -104,7 +104,7 @@ python_install() {
     dodir "$INSTALL_DIR/venv"
     dodir "$INSTALL_DIR/venv/bin"
     cd ${S}$INSTALL_DIR/venv/bin
-    CP3_10_INTERPRETER_ABS="$(realpath python3.10)"
+    CP3_10_INTERPRETER_ABS="$(realpath ./python3.10)"
     CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
     cd ${D}
     cp -Rpf "${S}/opt" "${D}/"
