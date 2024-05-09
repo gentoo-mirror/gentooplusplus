@@ -140,11 +140,15 @@ pkg_postinst() {
     SDIR=`pwd`
     cd ${HOME}
     HDIR=`pwd`
+    SYS_TMPDIR = `$(dirname $(mktemp -u))`
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    cd ${INSTALL_DIR}/venv
+    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
     cd ${INSTALL_DIR}/venv/bin
     find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
     cd ${INSTALL_DIR}/venv/.conan
     find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
+    find . -type f -exec sed 's~'${INSTALL_DIR}/venv/bin/deactivate_activate'~'${SYS_TMPDIR}'/deactivate_activate~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
