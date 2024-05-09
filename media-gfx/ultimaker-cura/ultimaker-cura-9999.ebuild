@@ -103,15 +103,18 @@ python_install() {
     dodir "$INSTALL_DIR"
     dodir "$INSTALL_DIR/venv"
     dodir "$INSTALL_DIR/venv/bin"
+    cd ${S}$INSTALL_DIR/venv/bin
+    CP3_10_INTERPRETER_ABS="$(realpath ./python3.10)"
+    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
     cd ${D}
     cp -Rpf "${S}/opt" "${D}/"
     cd ${D}
     cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/venv"
     cd "${S}/$INSTALL_DIR/"
-    source venv/bin/activate
-    CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
-    CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
-    source ${S}$INSTALL_DIR/venv/bin/deactivate_activate
+    #source venv/bin/activate
+    #CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
+    #CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
+    #source ${S}$INSTALL_DIR/venv/bin/deactivate_activate
     rm -f ${D}${INSTALL_DIR}/venv/bin/python3.10
     dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/venv/bin/python3.10
 }
