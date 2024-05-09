@@ -84,7 +84,7 @@ src_unpack() {
     conan config install $CONAN_INSTALLER_CONFIG_URL
     conan profile new default --detect --force
     conan profile update settings.compiler.libcxx=libstdc++11 default
-    EGIT_CHECKOUT_DIR="${S}$INSTALL_DIR"
+    EGIT_CHECKOUT_DIR="${S}${INSTALL_DIR}"
     if [[ ${PV} == *9999* ]] ; then
         git-r3_checkout
     else
@@ -100,21 +100,17 @@ src_unpack() {
 }
 
 python_install() {
-    dodir "$INSTALL_DIR"
-    dodir "$INSTALL_DIR/venv"
-    dodir "$INSTALL_DIR/venv/bin"
-    cd ${S}$INSTALL_DIR/venv/bin
+    dodir "${INSTALL_DIR}"
+    dodir "${INSTALL_DIR}/venv"
+    dodir "${INSTALL_DIR}/venv/bin"
+    cd ${S}${INSTALL_DIR}/venv/bin
     CP3_10_INTERPRETER_ABS="$(realpath ./python3.10)"
     CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
     cd ${D}
     cp -Rpf "${S}/opt" "${D}/"
     cd ${D}
-    cp -Rpf "${HOME}/.conan" "${D}$INSTALL_DIR/venv"
-    cd "${S}/$INSTALL_DIR/"
-    #source venv/bin/activate
-    #CP3_10_INTERPRETER_ABS=`whereis python | awk '{print $2}'`
-    #CP3_10_INTERPRETER=`realpath -s --relative-to=${S} ${CP3_10_INTERPRETER_ABS}`
-    #source ${S}$INSTALL_DIR/venv/bin/deactivate_activate
+    cp -Rpf "${HOME}/.conan" "${D}${INSTALL_DIR}/venv"
+    cd "${S}/${INSTALL_DIR}/"
     rm -f ${D}${INSTALL_DIR}/venv/bin/python3.10
     dosym ${CP3_10_INTERPRETER} ${INSTALL_DIR}/venv/bin/python3.10
 }
@@ -125,33 +121,34 @@ python_install_all() {
     cp -f "${FILESDIR}/run_ultimaker_cura.sh" "${ED}/tmp/"
     fperms 0755 /tmp/run_ultimaker_cura.sh
     fperms a+X /tmp/run_ultimaker_cura.sh
-    sed 's~CURA_INSTALL_DIR~'$INSTALL_DIR'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
+    sed 's~CURA_INSTALL_DIR~'${INSTALL_DIR}'~g' -i "${ED}/tmp/run_ultimaker_cura.sh"
     newsbin "${ED}/tmp/run_ultimaker_cura.sh" ${RUN_SBIN_COMMAND}
     rm -f "${ED}/tmp/run_ultimaker_cura.sh"
     rm -rf "${ED}/tmp"
+    # Now, we have to update the paths in the created virtual environment
+    cd ${T}
+    TDIR=`$(pwd)`
+    cd ${S}
+    SDIR=`$(pwd)`
+    cd ${HOME}
+    HDIR=`$(pwd)`
+    SYS_TMPDIR = `$(dirname $(mktemp -u))`
+    cd ${D}${INSTALL_DIR}/venv
+    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
+    cd bin
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    cd ../.conan
+    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
+    find . -type f -exec sed 's~'${INSTALL_DIR}/venv/bin/deactivate_activate'~'${SYS_TMPDIR}'/deactivate_activate~g' {} +
+    cd ${D}${INSTALL_DIR}
+    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
+    # We'll NOT update pyc-files, they will auto-generate anyways.
+    find ${D}${INSTALL_DIR} -name '*.pyc' -delete
     readme.gentoo_create_doc
 }
 
 
 pkg_postinst() {
-    # We'll NOT update pyc-files, they will auto-generate anyways.
-    find ${INSTALL_DIR} -name '*.pyc' -delete
-    # Now, we have to update the paths in the create virtual environments
-    cd ${T}
-    TDIR=`pwd`
-    cd ${S}
-    SDIR=`pwd`
-    cd ${HOME}
-    HDIR=`pwd`
-    SYS_TMPDIR = `$(dirname $(mktemp -u))`
-    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
-    cd ${INSTALL_DIR}/venv
-    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
-    cd ${INSTALL_DIR}/venv/bin
-    find . -type f -exec sed -i 's~'${SDIR}'~''~g' {} +
-    cd ${INSTALL_DIR}/venv/.conan
-    find . -type f -exec sed 's~'${HDIR}'~'${INSTALL_DIR}/venv/'~g' {} +
-    find . -type f -exec sed 's~'${INSTALL_DIR}/venv/bin/deactivate_activate'~'${SYS_TMPDIR}'/deactivate_activate~g' {} +
 	#elog "Ultimaker Cura requires python 3.10 or 3.11 to run. 3.12 and later are NOT YET supported."
 	#elog "Besides, in order to run it with python3.11 You still need.... 3.10 python executable."
 	elog "Ultimate Cura was installed into a virtualenv built info ${INSTALL_DIR}"
