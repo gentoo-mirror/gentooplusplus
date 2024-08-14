@@ -3,4 +3,5 @@ dev-python/node-semver 0.6.1: Python version of node-semver, the semantic versio
 dev-python/six 1.16.0-r1: Python 2 and 3 compatibility library
 dev-util/conan 1.64.0: Distributed C/C++ package manager
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
+sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 x11-misc/xfe 1.44 1.45 1.46: MS-Explorer-like minimalist file manager for X
