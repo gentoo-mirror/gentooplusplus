@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>leycec@gmail.com</email>
+		<name>leycec</name>
+		<description>Imported from "raiagent" overlay.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">Kivy</remote-id>
+		<remote-id type="github">kivy/kivy</remote-id>
+	</upstream>
+	<use>
+		<flag name="buildozer">Cross-compile Kivy apps via dev-python/buildozer (recommended)</flag>
+		<flag name="cython">Enable Kivy C extensions via dev-python/cython (recommended)</flag>
+		<flag name="examples">Build and install example Kivy apps</flag>
+		<flag name="gles2">Enable GLES2 support</flag>
+		<flag name="highlight">Enable syntax highlighting support via dev-python/pygments</flag>
+		<flag name="imaging">Enable image manipulation support via dev-python/pillow (recommended)</flag>
+		<flag name="pango">Enable support for x11-libs/pango</flag>
+		<flag name="pygame">Enable SDL2 support via dev-python/pygame</flag>
+		<flag name="pytest">Enable downstream "kivy.tests" Kivy app testing via dev-python/pytest</flag>
+		<flag name="rst">Enable reStructuredText (reST) support via dev-python/docutils</flag>
+	</use>
+</pkgmetadata>
