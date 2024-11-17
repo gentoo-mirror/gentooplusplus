@@ -67,6 +67,7 @@ RDEPEND="${DEPEND}
 	dev-python/Kivy-Garden[${PYTHON_USEDEP}]
 	dev-python/docutils[${PYTHON_USEDEP}]
 	dev-python/pygments[${PYTHON_USEDEP}]
+	dev-python/filetype[${PYTHON_USEDEP}]
 	buildozer? ( dev-python/buildozer[${PYTHON_USEDEP}] )
 	imaging? ( dev-python/pillow[${PYTHON_USEDEP}] )
 	pytest? (
