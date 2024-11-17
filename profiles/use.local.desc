@@ -2,3 +2,15 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
+dev-python/Kivy:buildozer - Cross-compile Kivy apps via dev-python/buildozer (recommended)
+dev-python/Kivy:cython - Enable Kivy C extensions via dev-python/cython (recommended)
+dev-python/Kivy:examples - Build and install example Kivy apps
+dev-python/Kivy:gles2 - Enable GLES2 support
+dev-python/Kivy:highlight - Enable syntax highlighting support via dev-python/pygments
+dev-python/Kivy:imaging - Enable image manipulation support via dev-python/pillow (recommended)
+dev-python/Kivy:pango - Enable support for x11-libs/pango
+dev-python/Kivy:pygame - Enable SDL2 support via dev-python/pygame
+dev-python/Kivy:pytest - Enable downstream "kivy.tests" Kivy app testing via dev-python/pytest
+dev-python/Kivy:rst - Enable reStructuredText (reST) support via dev-python/docutils
+dev-python/buildozer:android - Package for Android via dev-python/python-for-android (recommended)
+dev-python/buildozer:ios - Package for iOS via dev-python/kivy-ios (currently broken)
