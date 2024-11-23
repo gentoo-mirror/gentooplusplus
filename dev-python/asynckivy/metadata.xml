@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Eugeniusz-Gienek</name>
+		<description>Asynckivy is an async library that saves you from ugly callback-style code, like most of async libraries do</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">asynckivy</remote-id>
+		<remote-id type="github">asyncgui/asynckivy</remote-id>
+	</upstream>
+	<use>
+	</use>
+</pkgmetadata>
