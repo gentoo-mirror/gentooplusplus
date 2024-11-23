@@ -17,9 +17,11 @@ IUSE=""
 REQUIRED_USE=""
 
 BEPEND="
-	dev-python/Kivy[${PYTHON_USEDEP}]
+    virtual/pkgconfig
+    >=dev-python/cython-0.24.0[${PYTHON_USEDEP}]
 "
 DEPEND="
+	dev-python/Kivy[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
 
