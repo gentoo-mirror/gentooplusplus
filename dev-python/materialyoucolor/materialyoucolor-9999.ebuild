@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python3_{8..12} )
 
 inherit distutils-r1
 
-DESCRIPTION="KivyMD is a collection of Material Design compliant widgets for use with Kivy, a framework for cross-platform, touch-enabled graphical applications."
-HOMEPAGE="https://github.com/kivymd/KivyMD"
+DESCRIPTION="Material You color algorithms for python"
+HOMEPAGE="https://github.com/T-Dynamos/materialyoucolor-python"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,7 +18,6 @@ REQUIRED_USE=""
 
 BEPEND="
 	dev-python/Kivy[${PYTHON_USEDEP}]
-	dev-python/Kivy-MD[${PYTHON_USEDEP}]
 "
 DEPEND="
 "
@@ -29,7 +28,7 @@ DISTUTILS_IN_SOURCE_BUILD=
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
-	EGIT_REPO_URI="https://github.com/kivymd/KivyMD.git"
+	EGIT_REPO_URI="https://github.com/T-Dynamos/materialyoucolor-python.git"
 	EGIT_BRANCH="master"
 	SRC_URI=""
 	KEYWORDS=""

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Eugeniusz-Gienek</name>
+		<description>Material You color algorithms for python</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">materialyoucolor</remote-id>
+		<remote-id type="github">T-Dynamos/materialyoucolor-python</remote-id>
+	</upstream>
+	<use>
+	</use>
+</pkgmetadata>
