@@ -1,5 +1,6 @@
 dev-python/Kivy 9999: Open source UI framework written in Python
 dev-python/Kivy-Garden 9999: Kivy garden installation script
+dev-python/Kivy-MD 9999: KivyMD is a collection of Material Design compliant widgets for use with Kivy, a framework for cross-platform, touch-enabled graphical applications.
 dev-python/buildozer 9999: Kivy-friendly tool for packaging Python to mobile and desktop
 dev-python/distro 1.8.0: Reliable machine-readable Linux distribution information for Python
 dev-python/node-semver 0.6.1: Python version of node-semver, the semantic versioner for npm
