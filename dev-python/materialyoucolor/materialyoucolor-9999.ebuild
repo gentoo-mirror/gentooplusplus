@@ -17,9 +17,11 @@ IUSE=""
 REQUIRED_USE=""
 
 BEPEND="
-	dev-python/Kivy[${PYTHON_USEDEP}]
+    virtual/pkgconfig
+    >=dev-python/cython-0.24.0[${PYTHON_USEDEP}]
 "
 DEPEND="
+	dev-python/Kivy[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
 
@@ -29,7 +31,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
 	EGIT_REPO_URI="https://github.com/T-Dynamos/materialyoucolor-python.git"
-	EGIT_BRANCH="master"
+	EGIT_BRANCH="main"
 	SRC_URI=""
 	KEYWORDS=""
 else
