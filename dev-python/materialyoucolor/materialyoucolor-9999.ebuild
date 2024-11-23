@@ -38,9 +38,11 @@ else
 	# Strip all underscores from this package's version (e.g., reduce
 	# "2.3.0_rc3" to "2.3.0rc3").
 	MY_PV=${PV//_}
-	MY_P=${PN}-${MY_PV}
+    MY_P=${PN}-${MY_PV}
+	MY_P2=${MY_PV}/${PN}-${MY_PV}
 
-	SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
+	#SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
+	SRC_URI="https://github.com/T-Dynamos/materialyoucolor-python/releases/download/v${MY_P2}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 	S="${WORKDIR}/${MY_P}"
