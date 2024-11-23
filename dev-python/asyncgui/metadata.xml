@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Eugeniusz-Gienek</name>
+		<description>AsyncGui
+
+...is a minimalistic async library that:
+
+    does not provide features involving system calls, such as I/O, time retrieval, thread suspension, or thread spawning.
+    has no external dependencies when using Python 3.11 or later.
+    does not own a main loop, but is designed to integrate with an existing one.
+    avoids global state.
+    focuses on fast responsiveness, allowing immediate task start and resumption.
+    offers powerful structured concurrency APIs inspired by Trio and trio-util.
+    has nothing to do with GUIs, even though it has 'gui' in its name.
+</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="pypi">asyncgui</remote-id>
+		<remote-id type="github">asyncgui/asyncgui</remote-id>
+	</upstream>
+	<use>
+	</use>
+</pkgmetadata>

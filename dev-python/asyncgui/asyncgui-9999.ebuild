@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python3_{8..12} )
 
 inherit distutils-r1
 
-DESCRIPTION="Asynckivy is an async library that saves you from ugly callback-style code, like most of async libraries do."
-HOMEPAGE="https://github.com/asyncgui/asynckivy"
+DESCRIPTION="AsyncGui - Minimalistic Async Library"
+HOMEPAGE="https://github.com/asyncgui/asyncgui.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -21,7 +21,6 @@ BEPEND="
     >=dev-python/cython-0.24.0[${PYTHON_USEDEP}]
 "
 DEPEND="
-	dev-python/Kivy[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
 
@@ -30,7 +29,7 @@ DISTUTILS_IN_SOURCE_BUILD=
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
-	EGIT_REPO_URI="https://github.com/asyncgui/asynckivy.git"
+	EGIT_REPO_URI="https://github.com/asyncgui/asyncgui.git"
 	EGIT_BRANCH="main"
 	SRC_URI=""
 	KEYWORDS=""
@@ -42,7 +41,7 @@ else
 	MY_P2=${MY_PV}/${PN}-${MY_PV}
 
 	#SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
-	SRC_URI="https://github.com/asyncgui/asynckivy/archive/refs/tags/${MY_PV}.tar.gz"
+	SRC_URI="https://github.com/asyncgui/asyncgui/archive/refs/tags/${MY_PV}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 	S="${WORKDIR}/${MY_P}"
