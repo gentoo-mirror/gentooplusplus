@@ -1,6 +1,8 @@
 dev-python/Kivy 9999: Open source UI framework written in Python
 dev-python/Kivy-Garden 9999: Kivy garden installation script
 dev-python/Kivy-MD 9999: KivyMD is a collection of Material Design compliant widgets for use with Kivy, a framework for cross-platform, touch-enabled graphical applications.
+dev-python/asyncgui 0.7.1 9999: AsyncGui - Minimalistic Async Library
+dev-python/asynckivy 0.7.0 9999: Asynckivy is an async library that saves you from ugly callback-style code, like most of async libraries do.
 dev-python/buildozer 9999: Kivy-friendly tool for packaging Python to mobile and desktop
 dev-python/distro 1.8.0: Reliable machine-readable Linux distribution information for Python
 dev-python/materialyoucolor 2.0.9 9999: Material You color algorithms for python
