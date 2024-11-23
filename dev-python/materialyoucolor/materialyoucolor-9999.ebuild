@@ -29,7 +29,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
 	EGIT_REPO_URI="https://github.com/T-Dynamos/materialyoucolor-python.git"
-	EGIT_BRANCH="master"
+	EGIT_BRANCH="main"
 	SRC_URI=""
 	KEYWORDS=""
 else
