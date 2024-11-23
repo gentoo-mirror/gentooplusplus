@@ -18,9 +18,10 @@ REQUIRED_USE=""
 
 BEPEND="
 	dev-python/Kivy[${PYTHON_USEDEP}]
-	dev-python/Kivy-MD[${PYTHON_USEDEP}]
 "
 DEPEND="
+    dev-python/Kivy[${PYTHON_USEDEP}]
+    dev-python/materialyoucolor[${PYTHON_USEDEP}]
 "
 RDEPEND="${DEPEND}"
 
