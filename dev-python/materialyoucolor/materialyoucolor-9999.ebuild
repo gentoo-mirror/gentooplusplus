@@ -51,8 +51,6 @@ python_prepare_all() {
 }
 
 python_compile() {
-	KIVY_BUILD_EXAMPLES=0 \
-	KIVY_SPLIT_EXAMPLES=0 \
 		distutils-r1_python_compile
 }
 
