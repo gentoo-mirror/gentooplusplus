@@ -30,7 +30,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 
 	EGIT_REPO_URI="https://github.com/hannosch/python-gettext.git"
-	EGIT_BRANCH="main"
+	EGIT_BRANCH="master"
 	SRC_URI=""
 	KEYWORDS=""
 else
