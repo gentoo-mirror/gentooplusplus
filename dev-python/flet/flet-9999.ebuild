@@ -58,6 +58,8 @@ fi
 
 python_prepare_all() {
 	distutils-r1_python_prepare_all
+    sed -e "s/version = \"\"/version = \"${PV}\"/" -i packages/flet-cli/src/flet_cli/version.py || die
+    sed -e "s/version = \"0.2.0\"/version = \"${PV}\"/" -i packages/flet/src/flet/version.py || die
 }
 
 python_compile() {
