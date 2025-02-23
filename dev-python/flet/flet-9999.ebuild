@@ -30,6 +30,8 @@ DEPEND="
     dev-python/qrcode[${PYTHON_USEDEP}]
     dev-python/watchdog[${PYTHON_USEDEP}]
     dev-util/cookiecutter[${PYTHON_USEDEP}]
+    dev-python/python-mpv[${PYTHON_USEDEP}]
+    media-video/mpv[libmpv]
     "
 RDEPEND="${DEPEND}"
 
@@ -82,4 +84,5 @@ python_install_all() {
 	distutils-r1_python_install_all
     cd "${S}/packages/flet-web"
 	distutils-r1_python_install_all
+	dosym "/usr/$(get_libdir)/libmpv.so" "/usr/$(get_libdir)/libmpv.so.1"
 }
