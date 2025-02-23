@@ -38,7 +38,7 @@ if [[ ${PV} == 9999 ]]; then
 	S="${WORKDIR}/${MY_P}/repath-9999"
 else
 	MY_PV=${PV//_}
-	MY_P=${PN}-${MY_PV}
+	MY_P="python-${PN}-${MY_PV}"
 
 #	SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
     SRC_URI="https://github.com/nickcoutsos/python-repath/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
