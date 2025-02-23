@@ -25,6 +25,10 @@ BEPEND="
 DEPEND="
     >=dev-python/poetry-core-2.0.0[${PYTHON_USEDEP}]
     dev-python/repath[${PYTHON_USEDEP}]
+    dev-python/toml[${PYTHON_USEDEP}]
+    dev-python/rich[${PYTHON_USEDEP}]
+    dev-python/qrcode[${PYTHON_USEDEP}]
+    dev-python/watchdog[${PYTHON_USEDEP}]
     "
 RDEPEND="${DEPEND}"
 
@@ -39,7 +43,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_BRANCH="main"
 	SRC_URI=""
 	KEYWORDS=""
-	S="${WORKDIR}/${MY_P}/flet-9999/sdk/python/packages/flet"
+	S="${WORKDIR}/${MY_P}/flet-9999/sdk/python"
 else
 	MY_PV=${PV//_}
 	MY_P=${PN}-${MY_PV}
@@ -47,7 +51,7 @@ else
 #	SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
     SRC_URI="https://github.com/flet-dev/flet/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-    S="${WORKDIR}/${MY_P}/sdk/python/packages/flet"
+    S="${WORKDIR}/${MY_P}/sdk/python"
 fi
 
 
@@ -56,9 +60,23 @@ python_prepare_all() {
 }
 
 python_compile() {
+	cd "${S}/packages/flet"
+    distutils-r1_python_compile
+    cd "${S}/packages/flet-cli"
 	distutils-r1_python_compile
+	cd "${S}/packages/flet-desktop"
+	distutils-r1_python_compile
+	cd "${S}/packages/flet-web"
+    distutils-r1_python_compile
 }
 
 python_install_all() {
+    cd "${S}/packages/flet"
+	distutils-r1_python_install_all
+    cd "${S}/packages/flet-cli"
+	distutils-r1_python_install_all
+    cd "${S}/packages/flet-desktop"
+	distutils-r1_python_install_all
+    cd "${S}/packages/flet-web"
 	distutils-r1_python_install_all
 }
