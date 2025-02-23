@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>user@domain.com</email>
+        <name>Eugeniusz</name>
+        <description>Nothing special.</description>
+    </maintainer> 
+    <stabilize-allarches/>
+    <upstream>
+        <remote-id type="pypi">flet</remote-id>
+        <remote-id type="github">flet-dev/flet</remote-id>
+    </upstream>
+</pkgmetadata>
