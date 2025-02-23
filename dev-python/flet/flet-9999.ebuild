@@ -29,6 +29,7 @@ DEPEND="
     dev-python/rich[${PYTHON_USEDEP}]
     dev-python/qrcode[${PYTHON_USEDEP}]
     dev-python/watchdog[${PYTHON_USEDEP}]
+    dev-util/cookiecutter[${PYTHON_USEDEP}]
     "
 RDEPEND="${DEPEND}"
 
