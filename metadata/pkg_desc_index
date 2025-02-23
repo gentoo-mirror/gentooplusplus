@@ -5,9 +5,11 @@ dev-python/asyncgui 0.7.1 9999: AsyncGui - Minimalistic Async Library
 dev-python/asynckivy 0.7.0 9999: Asynckivy is an async library that saves you from ugly callback-style code, like most of async libraries do.
 dev-python/buildozer 9999: Kivy-friendly tool for packaging Python to mobile and desktop
 dev-python/distro 1.8.0: Reliable machine-readable Linux distribution information for Python
+dev-python/flet 0.27.1 9999: Flet is a framework that enables you to easily build real-time apps.
 dev-python/materialyoucolor 2.0.9 9999: Material You color algorithms for python
 dev-python/node-semver 0.6.1: Python version of node-semver, the semantic versioner for npm
 dev-python/python-gettext 9999: This implementation of Gettext for Python includes a Msgfmt class which can be used to generate compiled mo files from Gettext po files and includes support for the newer msgctxt keyword.
+dev-python/repath 0.7.1 9999: A port of the node module path-to-regexp to Python.
 dev-python/six 1.16.0-r1: Python 2 and 3 compatibility library
 dev-util/conan 1.64.0: Distributed C/C++ package manager
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
