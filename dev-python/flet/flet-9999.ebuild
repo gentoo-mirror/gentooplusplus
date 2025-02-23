@@ -31,6 +31,7 @@ DEPEND="
     dev-python/watchdog[${PYTHON_USEDEP}]
     dev-util/cookiecutter[${PYTHON_USEDEP}]
     dev-python/python-mpv[${PYTHON_USEDEP}]
+    dev-python/pydantic[${PYTHON_USEDEP}]
     media-video/mpv[libmpv]
     "
 RDEPEND="${DEPEND}"
