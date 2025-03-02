@@ -53,6 +53,7 @@ src_prepare() {
     sed "s/orcaslicer/orcaslicergentoo/" -i "${S}/${MY_P}/DockerRun.sh" || die
     sed "s/\-ti/\-dit/" -i "${S}/${MY_P}/DockerRun.sh" || die
     cd "${S}/${MY_P}"
+    die() { echo "$*" 1>&2 ; exit 1; }
     ./DockerBuild.sh || die " [ ERROR ] Could not build docker. Please check if portage user is in docker group. If not, please add, then re-run, smth like this: sudo usermod -aG docker portage"
 }
 
@@ -67,6 +68,6 @@ src_install() {
     cp -f "${FILESDIR}/DockerBuild2.sh" "${D}${INSTALL_DIR}"
     cp -f "${FILESDIR}/OrcaSlicer.png" "${D}/usr/share/icons/hicolor/192x192/apps/"
     cp -f "${FILESDIR}/orcaslicer.desktop" "${D}/usr/share/applications/"
-    echo "${PV}" > "${D}${INSTALL_DIR}package_version.txt"
+    echo "${PV}-${RANDOM}" > "${D}${INSTALL_DIR}package_version.txt"
     dosym "${INSTALL_DIR}orcaslicer_runner.sh" "usr/bin/orcaslicer"
 }
