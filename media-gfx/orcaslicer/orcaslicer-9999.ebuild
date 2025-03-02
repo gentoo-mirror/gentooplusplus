@@ -51,8 +51,9 @@ src_prepare() {
     sed "s/\&\& groupadd -f -g \$GID \$USER \\\\.*/\#\&\& groupadd -f -g \$GID \$USER \\\\/g" -i "${S}/${MY_P}/Dockerfile" || die
     sed "s/\&\& useradd -u \$UID -g \$GID \$USER.*/\#\&\& useradd -u \$UID -g \$GID \$USER/g" -i "${S}/${MY_P}/Dockerfile" || die
     sed "s/orcaslicer/orcaslicergentoo/" -i "${S}/${MY_P}/DockerRun.sh" || die
+    sed "s/\-ti/\-dit/" -i "${S}/${MY_P}/DockerRun.sh" || die
     cd "${S}/${MY_P}"
-    ./DockerBuild.sh || die
+    ./DockerBuild.sh || die " [ ERROR ] Could not build docker. Please check if portage user is in docker group. If not, please add, then re-run, smth like this: sudo usermod -aG docker portage"
 }
 
 
