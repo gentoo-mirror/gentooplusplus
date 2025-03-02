@@ -66,5 +66,6 @@ src_install() {
     cp "${FILESDIR}/DockerBuild2.sh" "${D}${INSTALL_DIR}"
     cp "${FILESDIR}/OrcaSlicer.png" "${D}/usr/share/icons/hicolor/192x192/apps/"
     cp "${FILESDIR}/orcaslicer.desktop" "${D}/usr/share/applications/"
+    echo "${PV}" > "${D}${INSTALL_DIR}package_version.txt"
     dosym "${INSTALL_DIR}orcaslicer_runner.sh" "usr/bin/orcaslicer"
 }
