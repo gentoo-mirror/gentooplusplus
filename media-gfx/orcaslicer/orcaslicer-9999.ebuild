@@ -58,7 +58,13 @@ src_prepare() {
 
 src_install() {
     mkdir -p "${D}${INSTALL_DIR}"
+    mkdir -p "${D}/usr/share/icons/hicolor/192x192/apps/"
+    mkdir -p "${D}/usr/share/applications/"
     cp -R "${WORKDIR}/${MY_P}/." "${D}${INSTALL_DIR}" || die "Install failed!"
-    cp -R "${FILESDIR}/*" "${D}${INSTALL_DIR}"
+    cp "${FILESDIR}/orcaslicer_runner.sh" "${D}${INSTALL_DIR}"
+    cp "${FILESDIR}/Dockerfile2" "${D}${INSTALL_DIR}"
+    cp "${FILESDIR}/DockerBuild2.sh" "${D}${INSTALL_DIR}"
+    cp "${FILESDIR}/OrcaSlicer.png" "${D}/usr/share/icons/hicolor/192x192/apps/"
+    cp "${FILESDIR}/orcaslicer.desktop" "${D}/usr/share/applications/"
     dosym "${INSTALL_DIR}orcaslicer_runner.sh" "usr/bin/orcaslicer"
 }
