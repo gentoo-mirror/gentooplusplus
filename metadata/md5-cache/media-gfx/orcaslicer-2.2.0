@@ -8,4 +8,4 @@ LICENSE=GPL-3
 RDEPEND=app-containers/docker-cli app-containers/docker
 SLOT=0
 SRC_URI=https://github.com/SoftFever/OrcaSlicer/archive/refs/tags/v2.2.0.tar.gz -> orcaslicer-2.2.0.gh.tar.gz
-_md5_=c580469ce8b8dfb8bb4de9d2aceec769
+_md5_=e6167e6876f48aeb4bee12e13843bcd1
