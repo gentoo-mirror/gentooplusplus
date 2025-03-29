@@ -48,8 +48,8 @@ src_prepare() {
     default
     sed "s/FROM docker\.io\/ubuntu\:.*/FROM docker\.io\/ubuntu\:22\.04/g" -i "${S}/${MY_P}/Dockerfile" || die
     sed "s/RUN \[\[ \"\$UID\" \!\= \"0\" \]\] \\\\.*/\# RUN \[\[ \"\$UID\" \!\= \"0\" \]\]  \\\\/g" -i "${S}/${MY_P}/Dockerfile" || die
-    sed "s/\&\& groupadd -f -g \$GID \$USER \\\\.*/\#\&\& groupadd -f -g \$GID \$USER \\\\/g" -i "${S}/${MY_P}/Dockerfile" || die
-    sed "s/\&\& useradd -u \$UID -g \$GID \$USER.*/\#\&\& useradd -u \$UID -g \$GID \$USER/g" -i "${S}/${MY_P}/Dockerfile" || die
+    sed "s/groupadd -f -g \$GID \$USER; \\\\.*/\#groupadd -f -g \$GID \$USER; \\\\/g" -i "${S}/${MY_P}/Dockerfile" || die
+    sed "s/useradd -u \$UID -g \$GID \$USER; \\\\.*/\#useradd -u \$UID -g \$GID \$USER \\\\/g" -i "${S}/${MY_P}/Dockerfile" || die
     sed "s/orcaslicer/orcaslicergentoo/" -i "${S}/${MY_P}/DockerRun.sh" || die
     sed "s/\-ti/\-dit/" -i "${S}/${MY_P}/DockerRun.sh" || die
     cd "${S}/${MY_P}"
