@@ -1,0 +1,11 @@
+DEFINED_PHASES=install prepare
+DEPEND=app-containers/docker-cli app-containers/docker
+DESCRIPTION=Orca Slicer is a free 3D printing slicer created by SoftFever.
+EAPI=8
+HOMEPAGE=https://orca-slicer.com/
+KEYWORDS=~amd64 ~arm ~arm64 ~x86
+LICENSE=GPL-3
+RDEPEND=app-containers/docker-cli app-containers/docker
+SLOT=0
+SRC_URI=https://github.com/SoftFever/OrcaSlicer/archive/refs/tags/v2.3.0.tar.gz -> orcaslicer-2.3.0.gh.tar.gz
+_md5_=318891db9e92ba43e51210823e09505b

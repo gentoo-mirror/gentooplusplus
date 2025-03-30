@@ -14,8 +14,8 @@ dev-python/repath 0.7.1 9999: A port of the node module path-to-regexp to Python
 dev-python/six 1.16.0-r1: Python 2 and 3 compatibility library
 dev-python/toml 0.10.2-r1: Python library for handling TOML files
 dev-util/conan 1.64.0: Distributed C/C++ package manager
-media-gfx/orcaslicer 2.2.0 9999: Orca Slicer is a free 3D printing slicer created by SoftFever.
-media-gfx/orcaslicer-bin 2.2.0: Orca Slicer is a free 3D printing slicer created by SoftFever.
+media-gfx/orcaslicer 2.2.0 2.3.0 9999: Orca Slicer is a free 3D printing slicer created by SoftFever.
+media-gfx/orcaslicer-bin 2.2.0 2.3.0: Orca Slicer is a free 3D printing slicer created by SoftFever.
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 media-plugins/kodi-inputstream-adaptive 9999: Kodi's Adaptive inputstream addon
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
