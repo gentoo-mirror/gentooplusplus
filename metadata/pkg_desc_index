@@ -1,3 +1,5 @@
+acct-group/genai 0.1 9999: Group for GenAI applications - in order to keep their actions on track
+acct-user/genai 0.1 9999: User for GenAI - in order to keep their actions under control
 dev-python/Kivy 9999: Open source UI framework written in Python
 dev-python/Kivy-Garden 9999: Kivy garden installation script
 dev-python/Kivy-MD 9999: KivyMD is a collection of Material Design compliant widgets for use with Kivy, a framework for cross-platform, touch-enabled graphical applications.
@@ -18,5 +20,6 @@ media-gfx/orcaslicer 2.2.0 2.3.0 9999: Orca Slicer is a free 3D printing slicer 
 media-gfx/orcaslicer-bin 2.2.0 2.3.0: Orca Slicer is a free 3D printing slicer created by SoftFever.
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 media-plugins/kodi-inputstream-adaptive 9999: Kodi's Adaptive inputstream addon
+sci-ml/sd-swarmui-web 0.9.6 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 x11-misc/xfe 1.44 1.45 1.46: MS-Explorer-like minimalist file manager for X
