@@ -1,0 +1,13 @@
+[Unit]
+Description=SwarmUI
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/swarmui-web
+User=genai
+Group=genai
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
