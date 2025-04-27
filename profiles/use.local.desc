@@ -14,5 +14,7 @@ dev-python/Kivy:pytest - Enable downstream "kivy.tests" Kivy app testing via dev
 dev-python/Kivy:rst - Enable reStructuredText (reST) support via dev-python/docutils
 dev-python/buildozer:android - Package for Android via dev-python/python-for-android (recommended)
 dev-python/buildozer:ios - Package for iOS via dev-python/kivy-ios (currently broken)
+sci-ml/kohyas-gui:desktop - Create a "desktop" file (browser launcher) and add an icon.
+sci-ml/kohyas-gui:systemd - Create a systemd service "kohyas-gui.service"
 sci-ml/sd-swarmui-web:desktop - Create a "desktop" file (browser launcher) and add an icon.
 sci-ml/sd-swarmui-web:systemd - Create a systemd service "swarmui.service"

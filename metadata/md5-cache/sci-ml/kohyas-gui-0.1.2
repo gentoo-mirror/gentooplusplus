@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=install postinst postrm prepare
+DEPEND=acct-user/genai acct-group/genai dev-python/virtualenv dev-vcs/git net-misc/curl net-misc/wget dev-lang/python[tk]
+DESCRIPTION=Kohya's GUI Web application
+EAPI=8
+HOMEPAGE=https://github.com/bmaltais/kohya_ss
+INHERIT=systemd desktop xdg-utils
+IUSE=+systemd +desktop +python_targets_python3_12
+KEYWORDS=~amd64 ~arm ~arm64 ~x86
+LICENSE=Apache-2.0
+RDEPEND=acct-user/genai acct-group/genai
+SLOT=0
+SRC_URI=https://github.com/Eugeniusz-Gienek/kohya_gui/archive/refs/tags/0.1.2.tar.gz -> kohyas-gui-0.1.2.gh.tar.gz
+_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=5b311a618b0bd13ae2779cfc4b2e6f72
