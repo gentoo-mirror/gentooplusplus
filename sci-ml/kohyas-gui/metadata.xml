@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>donotspamme@example.com</email>
+		<name>eugeniusz-gienek</name>
+		<description>If wannah reach - use Github issues system please.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="github">Eugeniusz-Gienek/kohya_gui</remote-id>
+	</upstream>
+	<use>
+		<flag name="systemd">Create a systemd service "kohyas-gui.service"</flag>
+		<flag name="desktop">Create a "desktop" file (browser launcher) and add an icon.</flag>
+	</use>
+</pkgmetadata>
