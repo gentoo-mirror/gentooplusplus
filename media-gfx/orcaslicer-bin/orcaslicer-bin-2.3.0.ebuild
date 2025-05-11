@@ -22,7 +22,9 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 RESTRICT="strip"
 #
 RDEPEND="sys-fs/fuse:0 \
-net-libs/webkit-gtk:4"
+net-libs/webkit-gtk:4 \
+media-libs/gstreamer \
+media-libs/gst-plugins-base"
 #
 QA_PREBUILT="*"
 #
