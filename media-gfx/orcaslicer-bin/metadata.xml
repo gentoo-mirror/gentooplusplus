@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>donotspamme@example.com</email>
+		<name>eugeniusz-gienek</name>
+		<description>If wannah reach - use Github issues system please.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="github">SoftFever/OrcaSlicer</remote-id>
+	</upstream>
+</pkgmetadata>
