@@ -30,6 +30,6 @@ src_install() {
     mkdir -p "${D}/usr/share/applications/"
     cp -f "${FILESDIR}/OrcaSlicer-bin.png" "${D}/usr/share/icons/hicolor/192x192/apps/"
     cp -f "${FILESDIR}/orcaslicer-bin.desktop" "${D}/usr/share/applications/"
-    cp "${DISTDIR}/OrcaSlicer_Linux_V${PV}.AppImage" orcaslicer-bin || die
+    cp "${DISTDIR}/OrcaSlicer_Linux_AppImage_V${PV}.AppImage" orcaslicer-bin || die
     dobin orcaslicer-bin
 }
