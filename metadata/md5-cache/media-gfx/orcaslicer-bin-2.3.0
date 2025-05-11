@@ -8,4 +8,4 @@ RDEPEND=sys-fs/fuse:0
 RESTRICT=strip
 SLOT=0
 SRC_URI=https://github.com/SoftFever/OrcaSlicer/releases/download/v2.3.0/OrcaSlicer_Linux_AppImage_V2.3.0.AppImage
-_md5_=7e93013cb09f6b0a4db005738577a110
+_md5_=950e7592db25008a65590538d4422dbc
