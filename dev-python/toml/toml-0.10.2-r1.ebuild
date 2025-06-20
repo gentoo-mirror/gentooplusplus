@@ -27,13 +27,13 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x64-solaris"
 
-BDEPEND="
-	test? (
-		$(python_gen_cond_dep '
-			dev-python/numpy[${PYTHON_USEDEP}]
-		' python3_{8..10})
-	)
-"
+BDEPEND=""
+#	test? (
+#		$(python_gen_cond_dep '
+#			dev-python/numpy[${PYTHON_USEDEP}]
+#		' python3_{8..10})
+#	)
+#"
 
 DOCS=( README.rst )
 
