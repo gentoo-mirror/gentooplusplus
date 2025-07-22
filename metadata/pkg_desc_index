@@ -1,5 +1,5 @@
-acct-group/genai 0.1 9999: Group for GenAI applications - in order to keep their actions on track
-acct-user/genai 0.1 9999: User for GenAI - in order to keep their actions under control
+acct-group/genai 0.1 0.2 9999: Group for GenAI applications - in order to keep their actions on track
+acct-user/genai 0.1 0.2 9999: User for GenAI - in order to keep their actions under control
 dev-python/Kivy 9999: Open source UI framework written in Python
 dev-python/Kivy-Garden 9999: Kivy garden installation script
 dev-python/Kivy-MD 9999: KivyMD is a collection of Material Design compliant widgets for use with Kivy, a framework for cross-platform, touch-enabled graphical applications.
