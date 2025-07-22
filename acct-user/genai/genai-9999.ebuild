@@ -8,5 +8,6 @@ inherit acct-user
 DESCRIPTION="User for GenAI - in order to keep their actions under control"
 ACCT_USER_ID=665
 ACCT_USER_GROUPS=( ${PN} )
+ACCT_USER_HOME="/opt/genai"
 
 acct-user_add_deps
