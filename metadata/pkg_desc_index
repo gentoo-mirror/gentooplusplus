@@ -21,6 +21,7 @@ media-gfx/orcaslicer-bin 2.2.0 2.3.0: Orca Slicer is a free 3D printing slicer c
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 media-plugins/kodi-inputstream-adaptive 9999: Kodi's Adaptive inputstream addon
 sci-ml/kohyas-gui 0.1.2 0.1.3 9999: Kohya's GUI Web application
+sci-ml/ollama 0.9.6: Ollama - get up and running with large language models.
 sci-ml/sd-swarmui-web 0.9.6 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 x11-misc/xfe 1.44 1.45 1.46: MS-Explorer-like minimalist file manager for X
