@@ -25,4 +25,5 @@ sci-ml/ollama 0.9.6: Ollama - get up and running with large language models.
 sci-ml/ollama-amd 0.9.6: Ollama - get up and running with large language models - additional amd package
 sci-ml/sd-swarmui-web 0.9.6 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
+www-misc/kiwix-tools 3.7.0: The Kiwix tools is a collection of Kiwix related command line tools.
 x11-misc/xfe 1.44 1.45 1.46: MS-Explorer-like minimalist file manager for X
