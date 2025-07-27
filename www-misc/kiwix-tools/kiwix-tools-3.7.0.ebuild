@@ -43,10 +43,7 @@ KEYWORDS="~amd64 ~x86 ~arm64 ~arm"
 #
 RESTRICT="strip"
 #
-RDEPEND="\
-    acct-user/genai\
-    acct-group/genai\
-"
+RDEPEND=""
 #
 QA_PREBUILT="*"
 #
