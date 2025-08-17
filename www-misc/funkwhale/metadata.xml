@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>donotspamme@example.com</email>
+		<name>eugeniusz-gienek</name>
+		<description>If wannah reach - use Github issues system please.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="gitlab">funkwhale/funkwhale</remote-id>
+	</upstream>
+	<use>
+		<flag name="systemd">Create systemd services "funkwhale-beat.service", "funkwhale-server.service","funkwhale-worker.service","funkwhale.target".</flag>
+		<flag name="nginx">Create nginx configuration.</flag>
+		<flag name="apache">Create apache configuration.</flag>
+	</use>
+</pkgmetadata>
