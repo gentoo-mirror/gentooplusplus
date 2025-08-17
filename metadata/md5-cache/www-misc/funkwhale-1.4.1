@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=install postinst prepare
+DEPEND=acct-user/media acct-group/media media-libs/libjpeg-turbo dev-libs/libpqxx net-libs/libgsasl >=dev-db/postgresql-12.0 >=dev-db/redis-6.0 >=media-video/ffmpeg-4.3 nginx? ( www-servers/nginx[http2,nginx_modules_http_proxy,ssl] ) apache? ( www-servers/apache[apache2_modules_proxy,apache2_modules_proxy_http2,apache2_modules_http2,ssl] ) dev-perl/File-LibMagic dev-python/python-magic dev-python/ldap3 dev-python/python-ldap[sasl] sys-libs/zlib dev-libs/libffi dev-libs/openssl dev-libs/libxml2 dev-libs/libxslt dev-python/virtualenv dev-vcs/git net-misc/curl dev-lang/python sys-apps/yarn net-libs/nodejs
+DESCRIPTION=Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark.
+EAPI=8
+HOMEPAGE=https://www.funkwhale.audio/
+INHERIT=systemd
+IUSE=+systemd +nginx apache
+KEYWORDS=~amd64 ~arm ~arm64 ~x86
+LICENSE=AGPL-3.0
+RDEPEND=acct-user/media acct-group/media
+SLOT=0
+SRC_URI=https://dev.funkwhale.audio/funkwhale/funkwhale/-/archive/1.4.1/funkwhale-1.4.1.tar.gz -> funkwhale-1.4.1.gh.tar.gz
+_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861
+_md5_=1a9c2b05d6c050013622150c2081f1f2
