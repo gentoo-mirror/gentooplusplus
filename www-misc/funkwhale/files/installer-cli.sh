@@ -22,10 +22,18 @@ fi
 if [[ $FIRST_RUN -eq 1 ]]; then
 SELFSIGNED=0
 FUNKWHALE_USER="media"
+SERVERHOSTNAME="localhost"
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root."
    exit 1
 fi
+echo    #
+read -p "[ INPUT ] Please enter the server address (if empty \"localhost\" will be used): " SERVERHOSTNAME
+if [ -z "${SERVERHOSTNAME}" ]; then
+    SERVERHOSTNAME="localhost"
+fi
+echo "[ INFO ] Installing for server \"${SERVERHOSTNAME}\"."
+echo    #
 echo    #
 echo "[ INFO ] Later in questions please don't press enter after entering Y or y or other symbols."
 echo    #
@@ -41,6 +49,7 @@ fi
 if [ ! -f "${INSTALLED_DIR}/config/.env" ]; then
     echo "[ INFO ] Configuration didn't exist so copying example configuration. Please don't forget to update it with your data. It is located here: \"${INSTALLED_DIR}/config/.env\""
     cp -f "${INSTALLED_DIR}/config/env.example" "${INSTALLED_DIR}/config/.env"
+    sed -i "s,FUNKWHALE_HOSTNAME=localhost,FUNKWHALE_HOSTNAME=${SERVERHOSTNAME}," "${INSTALLED_DIR}/config/.env"
     read -p "[ QUESTION ] Would you like to generate a self-signed certificate)? (type Y or y if yes) " -n 1 -r
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
