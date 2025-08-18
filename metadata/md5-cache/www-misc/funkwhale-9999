@@ -1,5 +1,5 @@
 BDEPEND=virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=install postinst prepare unpack
+DEFINED_PHASES=config install postinst postrm prepare prerm unpack
 DEPEND=acct-user/media acct-group/media media-libs/libjpeg-turbo dev-libs/libpqxx net-libs/libgsasl >=dev-db/postgresql-12.0 >=dev-db/redis-6.0 >=media-video/ffmpeg-4.3 nginx? ( www-servers/nginx[http2,nginx_modules_http_proxy,ssl] ) apache? ( www-servers/apache[apache2_modules_proxy,apache2_modules_proxy_http2,apache2_modules_http2,ssl] ) dev-perl/File-LibMagic dev-python/python-magic dev-python/ldap3 dev-python/python-ldap[sasl] sys-libs/zlib dev-libs/libffi dev-libs/openssl dev-libs/libxml2 dev-libs/libxslt dev-python/virtualenv dev-vcs/git net-misc/curl dev-lang/python sys-apps/yarn net-libs/nodejs
 DESCRIPTION=Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark.
 EAPI=8
@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=acct-user/media acct-group/media
 SLOT=0
 _eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=f9319d5b30758c461ff23ea9aab2d908
+_md5_=9a0bca8c4e2abcb3a312a9637c64f4db
