@@ -222,15 +222,15 @@ pkg_config() {
         PACKAGEVERSIONTEST=`cat ${EROOT}${INSTALL_DIR}/package_version.txt`
         if [[ "${PACKAGEVERSIONTEST}" != "${PACKAGEVERSION}" ]]; then
             if [[ ${PV} == 9999 ]]; then
-                ewarn "Package was already configured for a different version - most probably it was reinstalled."
+                einfo "Package was already configured for a different version - most probably it was reinstalled."
             else
-                ewarn "Package was already configured for a different version - looks like it is an upgrade or reinstall."
+                einfo "Package was already configured for a different version - looks like it is an upgrade or reinstall."
             fi
         else
-            ewarn "Package is already configured for this exact version. Please confirm you want to reconfigure it."
+            einfo "Package is already configured for this exact version. Please confirm you want to reconfigure it."
         fi
-        ewarn "If you don't want to re-configure, please press Ctrl+C now."
-        ewarn "Otherwise, press Enter."
+        einfo "If you don't want to re-configure, please press Ctrl+C now."
+        einfo "Otherwise, press Enter."
         read
         einfo "Performing re-configuration."
         rm -f "${EROOT}${INSTALL_DIR}/package_version_init.txt"
@@ -243,8 +243,8 @@ pkg_config() {
         einfo "Cleaning up."
         rm -Rf api/* front/* venv
     else
-        ewarn "This will start the configuration phase."
-        ewarn "Press Enter to continue or Ctrl+C to cancel."
+        einfo "This will start the configuration phase."
+        einfo "Press Enter to continue or Ctrl+C to cancel."
         read
         einfo "Performing configuration."
     fi
