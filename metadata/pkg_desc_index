@@ -15,7 +15,7 @@ dev-python/materialyoucolor 2.0.9 9999: Material You color algorithms for python
 dev-python/node-semver 0.6.1: Python version of node-semver, the semantic versioner for npm
 dev-python/python-gettext 9999: This implementation of Gettext for Python includes a Msgfmt class which can be used to generate compiled mo files from Gettext po files and includes support for the newer msgctxt keyword.
 dev-python/repath 0.7.1 9999: A port of the node module path-to-regexp to Python.
-dev-python/six 1.16.0-r1: Python 2 and 3 compatibility library
+dev-python/six 1.16.0-r1 1.17.0: Python 2 and 3 compatibility library
 dev-python/toml 0.10.2-r1: Python library for handling TOML files
 dev-util/conan 1.64.0: Distributed C/C++ package manager
 media-gfx/orcaslicer 2.2.0 2.3.0 9999: Orca Slicer is a free 3D printing slicer created by SoftFever.
@@ -23,7 +23,7 @@ media-gfx/orcaslicer-bin 2.2.0 2.3.0: Orca Slicer is a free 3D printing slicer c
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 sci-ml/kohyas-gui 0.1.2 0.1.3 9999: Kohya's GUI Web application
 sci-ml/ollama 0.9.6 0.11.6: Ollama - get up and running with large language models.
-sci-ml/ollama-amd 0.9.6: Ollama - get up and running with large language models - additional amd package
+sci-ml/ollama-amd 0.9.6 0.11.6: Ollama - get up and running with large language models - additional amd package
 sci-ml/sd-swarmui-web 0.9.6 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 www-misc/funkwhale 1.4.1 9999: Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark.
