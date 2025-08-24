@@ -16,6 +16,8 @@ dev-python/buildozer:android - Package for Android via dev-python/python-for-and
 dev-python/buildozer:ios - Package for iOS via dev-python/kivy-ios (currently broken)
 sci-ml/kohyas-gui:desktop - Create a "desktop" file (browser launcher) and add an icon.
 sci-ml/kohyas-gui:systemd - Create a systemd service "kohyas-gui.service"
+sci-ml/ollama:cpuonly - If using systemd, adjust the systemd service parameters to ignore the GPU and use only CPU.
+sci-ml/ollama:systemd - Create a systemd service "ollama.service"
 sci-ml/sd-swarmui-web:desktop - Create a "desktop" file (browser launcher) and add an icon.
 sci-ml/sd-swarmui-web:systemd - Create a systemd service "swarmui.service"
 www-misc/funkwhale:apache - Create apache configuration.
