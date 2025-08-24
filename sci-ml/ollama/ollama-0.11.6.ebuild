@@ -13,7 +13,7 @@ HOMEPAGE="https://ollama.com/"
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="+systemd"
+IUSE="+systemd cpuonly"
 
 BEPEND="virtual/pkgconfig"
 
@@ -63,6 +63,10 @@ src_install() {
     #dosym "${INSTALL_DIR}swarmui_runner.sh" "usr/bin/swarmui-web"
     cd "${D}"
     if use systemd; then
-        systemd_newunit "${FILESDIR}"/ollama.service ollama.service
+        if use cpuonly; then
+            systemd_newunit "${FILESDIR}"/ollama-cpu.service ollama.service
+        else
+            systemd_newunit "${FILESDIR}"/ollama.service ollama.service
+        fi
     fi
 }
