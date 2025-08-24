@@ -8,6 +8,7 @@ User=genai
 Group=genai
 Restart=always
 RestartSec=3
+Environment="HOME=/opt/genai"
 Environment="PATH=$PATH"
 
 [Install]
