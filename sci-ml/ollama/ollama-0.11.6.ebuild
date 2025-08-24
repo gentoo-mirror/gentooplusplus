@@ -14,7 +14,9 @@ LICENSE="MIT"
 SLOT="0"
 
 IUSE="+systemd cpuonly"
-
+REQUIRED_USE="
+    cpuonly? ( systemd )
+"
 BEPEND="virtual/pkgconfig"
 
 RDEPEND="\
