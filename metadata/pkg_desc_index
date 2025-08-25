@@ -28,5 +28,6 @@ sci-ml/sd-swarmui-web 0.9.6 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 www-misc/funkwhale 1.4.1 9999: Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark.
 www-misc/kiwix-tools 3.7.0: The Kiwix tools is a collection of Kiwix related command line tools.
+www-misc/open-webui 0.6.25 9999: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. It supports various LLM runners like Ollama and OpenAI-compatible APIs, with built-in inference engine for RAG, making it a powerful AI deployment solution.
 www-misc/peertube 7.2.3 9999: PeerTube is a free, decentralized and federated video platform developed as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
 x11-misc/xfe 1.44 1.45 1.46 2.0 2.0.1 2.1 2.1.1: MS-Explorer-like minimalist file manager for X

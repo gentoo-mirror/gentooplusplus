@@ -23,3 +23,5 @@ sci-ml/sd-swarmui-web:systemd - Create a systemd service "swarmui.service"
 www-misc/funkwhale:apache - Create apache configuration.
 www-misc/funkwhale:nginx - Create nginx configuration.
 www-misc/funkwhale:systemd - Create systemd services "funkwhale-beat.service", "funkwhale-server.service","funkwhale-worker.service","funkwhale.target".
+www-misc/open-webui:ollama - Install also Ollama to be used with this server.
+www-misc/open-webui:systemd - Create a systemd service "swarmui.service"
