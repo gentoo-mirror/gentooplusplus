@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>donotspamme@example.com</email>
+		<name>eugeniusz-gienek</name>
+		<description>If wannah reach - use Github issues system please.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="github">open-webui/open-webui</remote-id>
+	</upstream>
+	<use>
+		<flag name="systemd">Create a systemd service "swarmui.service"</flag>
+		<flag name="ollama">Install also Ollama to be used with this server.</flag>
+	</use>
+</pkgmetadata>
