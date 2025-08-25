@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_10 python3_11 )
 
-inherit systemd
+inherit systemd python-single-r1
 
 DESCRIPTION="Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark."
 HOMEPAGE="https://www.funkwhale.audio/"
@@ -14,6 +14,8 @@ LICENSE="AGPL-3.0"
 SLOT="0"
 
 IUSE="+systemd +nginx apache"
+
+REQUIRED_USE="^^ ( python_single_target_python3_10 python_single_target_python3_11 )"
 
 BEPEND="virtual/pkgconfig"
 
@@ -129,8 +131,9 @@ REQUESTS_CA_BUNDLE=/etc/ssl/certs/localhost.crt\
     if [[ ${PV} == 9999 ]]; then
         PYTHON_EXECUTABLE="python3"
     else
-        if ! command -v python3.11 >/dev/null 2>&1
-        then
+        #if ! command -v python3.11 >/dev/null 2>&1
+        #then
+        if use python_single_target_python3_10;then
             PYTHON_EXECUTABLE="python3.10"
         else
             PYTHON_EXECUTABLE="python3.11"
