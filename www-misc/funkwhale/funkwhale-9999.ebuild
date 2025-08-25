@@ -13,7 +13,7 @@ HOMEPAGE="https://www.funkwhale.audio/"
 LICENSE="AGPL-3.0"
 SLOT="0"
 
-IUSE="+systemd +nginx apache"
+IUSE="+systemd +nginx apache python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13"
 
 REQUIRED_USE="^^ ( python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13)"
 
