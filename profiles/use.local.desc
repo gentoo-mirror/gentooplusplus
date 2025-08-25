@@ -22,6 +22,10 @@ sci-ml/sd-swarmui-web:desktop - Create a "desktop" file (browser launcher) and a
 sci-ml/sd-swarmui-web:systemd - Create a systemd service "swarmui.service"
 www-misc/funkwhale:apache - Create apache configuration.
 www-misc/funkwhale:nginx - Create nginx configuration.
+www-misc/funkwhale:python_single_target_python3_10 - Build for Python3.10
+www-misc/funkwhale:python_single_target_python3_11 - Build for Python3.11
+www-misc/funkwhale:python_single_target_python3_12 - Build for Python3.12
+www-misc/funkwhale:python_single_target_python3_13 - Build for Python3.13
 www-misc/funkwhale:systemd - Create systemd services "funkwhale-beat.service", "funkwhale-server.service","funkwhale-worker.service","funkwhale.target".
 www-misc/open-webui:ollama - Install also Ollama to be used with this server.
 www-misc/open-webui:systemd - Create a systemd service "swarmui.service"
