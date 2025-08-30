@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=acct-user/genai acct-group/genai
 SLOT=0
 _eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=9447306af9110e8b3f10b7010a9e05cc
+_md5_=ce8bce154219247ba00ad66e0ee71ff9
