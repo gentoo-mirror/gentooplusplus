@@ -46,10 +46,10 @@ if [[ ${PV} == 9999 ]]; then
     MY_PN="sd-sarmui-web"
     S="${WORKDIR}"
 else
-    MY_PV=${PV//_}
+    MY_PV="${PV//_}"
     MY_PN="sd-swarmui-web"
     MY_P=${MY_PN}-${MY_PV}
-    SRC_URI="https://github.com/mcmonkeyprojects/SwarmUI/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
+    SRC_URI="https://github.com/mcmonkeyprojects/SwarmUI/archive/refs/tags/${PV}-Beta.tar.gz -> ${MY_P}.gh.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
     S="${WORKDIR}/"
 fi
@@ -66,7 +66,11 @@ src_install() {
     if use desktop; then
         mkdir -p "${D}/usr/share/applications/"
     fi
-    cp -R -f "${WORKDIR}/${MY_P}/." "${D}${INSTALL_DIR}" || die "Install failed!"
+    if [[ ${PV} == 9999 ]]; then
+        cp -R -f "${WORKDIR}/${MY_P}/." "${D}${INSTALL_DIR}" || die "Install failed!"
+    else
+        cp -R -f "${WORKDIR}/SwarmUI-${MY_PV}-Beta/." "${D}${INSTALL_DIR}" || die "Install failed!"
+    fi
     chown -R genai:genai "${D}${INSTALL_DIR}"
     cp -f "${FILESDIR}/swarmui_runner.sh" "${D}${INSTALL_DIR}"
     chmod +x "${D}${INSTALL_DIR}/swarmui_runner.sh"
