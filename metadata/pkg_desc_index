@@ -1,6 +1,6 @@
-acct-group/genai 0.1 0.2 9999: Group for GenAI applications - in order to keep their actions on track
+acct-group/genai 0.1 0.2 0.3 9999: Group for GenAI applications - in order to keep their actions on track
 acct-group/media 0.1: Group for a media user, used for Media Servers and other media operations
-acct-user/genai 0.1 0.2 9999: User for GenAI - in order to keep their actions under control
+acct-user/genai 0.1 0.2 0.3 9999: User for GenAI - in order to keep their actions under control
 acct-user/media 0.1: User for Media Servers and other media operations
 dev-python/Kivy 9999: Open source UI framework written in Python
 dev-python/Kivy-Garden 9999: Kivy garden installation script

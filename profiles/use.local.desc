@@ -18,7 +18,13 @@ sci-ml/kohyas-gui:desktop - Create a "desktop" file (browser launcher) and add a
 sci-ml/kohyas-gui:systemd - Create a systemd service "kohyas-gui.service"
 sci-ml/ollama:cpuonly - If using systemd, adjust the systemd service parameters to ignore the GPU and use only CPU.
 sci-ml/ollama:systemd - Create a systemd service "ollama.service"
+sci-ml/sd-swarmui-web:amd - build for AMD GPU, ROCM-based
+sci-ml/sd-swarmui-web:comfyui - build the built-in ComfyUI backend. If unselected, you will have to manually install backend later on.
+sci-ml/sd-swarmui-web:cpu - build for CPU-generation only
 sci-ml/sd-swarmui-web:desktop - Create a "desktop" file (browser launcher) and add an icon.
+sci-ml/sd-swarmui-web:intel - build for Intel GPU (IPEX) Compatible Hardware ( https://docs.pytorch.org/docs/main/notes/get_start_xpu.html ): Intel® Arc A-Series Graphics (CodeName: Alchemist); Intel® Arc B-Series Graphics (CodeName: Battlemage); Intel® Core™ Ultra Processors with Intel® Arc™ Graphics (CodeName: Meteor Lake-H); Intel® Core™ Ultra Desktop Processors (Series 2) with Intel® Arc™ Graphics (CodeName: Lunar Lake); Intel® Core™ Ultra Mobile Processors (Series 2) with Intel® Arc™ Graphics (CodeName: Arrow Lake-H); Intel® Data Center GPU Max Series (CodeName: Ponte Vecchio)
+sci-ml/sd-swarmui-web:ipex - build for Intel GPU (IPEX) Compatible Hardware: Intel® Arc™ A-Series Graphics (Intel® Arc™ A770 [Verified], Intel® Arc™ A750, Intel® Arc™ A580, Intel® Arc™ A770M, Intel® Arc™ A730M, Intel® Arc™ A550M); Intel® Arc™ B-Series Graphics (Intel® Arc™ B580 [Verified], Intel® Arc™ B570); Intel® Data Center GPU Max Series [Verified]; For GPUs newer than Intel® Core™ Ultra Processors with Intel® Arc™ Graphics (Meteor Lake) or Intel® Arc™ A-Series Graphics that aren't listed, please check the AOT documentation ( https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-0/ahead-of-time-compilation.html ) to see if it is supported. If so, follow instructions in the source section above to compile from source.
+sci-ml/sd-swarmui-web:nvidia - build for NVidia GPU, cuda-based
 sci-ml/sd-swarmui-web:systemd - Create a systemd service "swarmui.service"
 www-misc/funkwhale:apache - Create apache configuration.
 www-misc/funkwhale:nginx - Create nginx configuration.
