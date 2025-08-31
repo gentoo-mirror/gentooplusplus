@@ -3,10 +3,8 @@
 die() { echo "$*" 1>&2 ; exit 1; }
 #HOME=/opt/swarmui/
 CONFIG_FILE="/etc/swarmui/env.conf"
-export PATH="${PATH}:/opt/genai/.dotnet:/opt/swarmui/.dotnet:/opt/cuda/bin/"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/cuda/lib64/"
-export PKG_CONFIG_PATH="/opt/cuda/pkgconfig"
-export CUDA_HOME="/opt/cuda/"
+export PATH="${PATH}:/opt/genai/.dotnet:/opt/swarmui/.dotnet"
+export CUDA_VISIBLE_DEVICES=-1
 
 cd /opt/swarmui/
 
