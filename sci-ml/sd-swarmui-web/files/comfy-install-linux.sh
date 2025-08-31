@@ -7,6 +7,7 @@ if [ $# -eq 0 ]; then
 fi
 
 GPU_TYPE=$1
+python=$2
 
 # Validate GPU type
 if [ "$GPU_TYPE" != "cpu" ] && [ "$GPU_TYPE" != "amd" ] && [ "$GPU_TYPE" != "amd2" ]&& [ "$GPU_TYPE" != "amd3" ] && [ "$GPU_TYPE" != "nv" ] && [ "$GPU_TYPE" != "intel" ] && [ "$GPU_TYPE" != "ipex" ]; then
@@ -24,18 +25,18 @@ cd ComfyUI
 
 # Try to find a good python executable, and dodge unsupported python versions
 #for pyvers in python3.11 python3.10 python3.12 python3 python
-for pyvers in python3 python
-do
-    python=`which $pyvers`
-    if [ "$python" != "" ]; then
-        break
-    fi
-done
-if [ "$python" == "" ]; then
-    >&2 echo "ERROR: cannot find python3"
-    >&2 echo "Please follow the install instructions in the readme!"
-    exit 1
-fi
+#for pyvers in python3 python
+#do
+#    python=`which $pyvers`
+#    if [ "$python" != "" ]; then
+#        break
+#    fi
+#done
+#if [ "$python" == "" ]; then
+#    >&2 echo "ERROR: cannot find python3"
+#    >&2 echo "Please follow the install instructions in the readme!"
+#    exit 1
+#fi
 
 # Validate venv
 venv=`$python -m venv 2>&1`
