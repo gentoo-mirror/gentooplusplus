@@ -9,7 +9,7 @@ fi
 GPU_TYPE=$1
 
 # Validate GPU type
-if [ "$GPU_TYPE" != "cpu" ] && [ "$GPU_TYPE" != "amd" ] && [ "$GPU_TYPE" != "nv" ] && [ "$GPU_TYPE" != "intel" ] && [ "$GPU_TYPE" != "ipex" ]; then
+if [ "$GPU_TYPE" != "cpu" ] && [ "$GPU_TYPE" != "amd" ] && [ "$GPU_TYPE" != "amd2" ]&& [ "$GPU_TYPE" != "amd3" ] && [ "$GPU_TYPE" != "nv" ] && [ "$GPU_TYPE" != "intel" ] && [ "$GPU_TYPE" != "ipex" ]; then
     >&2 echo "Error: Invalid GPU type. Please use 'cpu', 'amd', 'intel', 'ipex' or 'nv'."
     exit 1
 fi
@@ -77,7 +77,7 @@ if [ "$GPU_TYPE" == "nv" ]; then
     echo "install nvidia torch..."
     $python -s -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
    # $python -s -m pip install torch==2.6.0+cu124 torchvision==0.21.0+cu124 torchaudio==2.6.0+cu124 --extra-index-url https://download.pytorch.org/whl/cu124
-elif [ "$GPU_TYPE" == "amd" ]; then
+elif [ "$GPU_TYPE" == "amd" ] || [ "$GPU_TYPE" == "amd2" ] || [ "$GPU_TYPE" == "amd3" ]; then
     echo "install amd torch..."
     $python -s -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.4
 elif [ "$GPU_TYPE" == "cpu" ]; then
@@ -121,7 +121,7 @@ if [ "$GPU_TYPE" == "nv" ]; then
     echo "Installing additional modules"
     $python -s -m pip install rembg onnxruntime matplotlib opencv-python-headless imageio-ffmpeg dill omegaconf ultralytics comfyui_frontend_package
 else
-    if [ "$GPU_TYPE" != "amd" ]; then
+    if [ "$GPU_TYPE" != "amd" ] && [ "$GPU_TYPE" != "amd2" ] && [ "$GPU_TYPE" != "amd3" ]; then
         sed -i "s/os.environ\['HIP_VISIBLE_DEVICES'\] = str(devices)/os.environ['HIP_VISIBLE_DEVICES'] = '-1'/" "main.py"
         sed -i "s/os.environ\['HIP_VISIBLE_DEVICES'\] = str(args.cuda_device)/os.environ['HIP_VISIBLE_DEVICES'] = '-1'/" "main.py"
     fi
@@ -130,17 +130,44 @@ else
         sed -i "s/os.environ\['CUDA_VISIBLE_DEVICES'\] = str(devices)/os.environ\['CUDA_VISIBLE_DEVICES'\] = '-1'/" "main.py"
         sed -i "s/os.environ\['CUDA_VISIBLE_DEVICES'\] = str(args.cuda_device)/os.environ\['CUDA_VISIBLE_DEVICES'\] = '-1'/" "main.py"
     fi
-fi
-
-if [ "$GPU_TYPE" == "ipex" ] || [ "$GPU_TYPE" == "intel" ]; then
-    TEST_INTEL_GPU=`python -c "import torch;print(torch.xpu.is_available())" | tail -n 1`
-    if [ "$TEST_INTEL_GPU" == "False" ]; then
-        echo ""
-        echo ""
-        echo "!!! Your Intel GPU was NOT detected !!!"
-        echo ""
-        echo ""
+    if [ "$GPU_TYPE" == "amd2" ]; then
+        sed -i "/import os/a os.environ\['HSA_OVERRIDE_GFX_VERSION'\] = '10.3.0'" "main.py"
+    fi
+    if [ "$GPU_TYPE" == "amd3" ]; then
+        sed -i "/import os/a os.environ\['HSA_OVERRIDE_GFX_VERSION'\] = '11.0.0'" "main.py"
+    fi
+    if [ "$GPU_TYPE" == "ipex" ] || [ "$GPU_TYPE" == "intel" ]; then
+        TEST_INTEL_GPU=`python -c "import torch;print(torch.xpu.is_available())" | tail -n 1`
+        if [ "$TEST_INTEL_GPU" == "False" ]; then
+            echo ""
+            echo ""
+            echo "!!! Your Intel GPU was NOT detected !!!"
+            echo ""
+            echo ""
+        fi
     fi
 fi
 
-echo "Installation completed for $GPU_TYPE GPU."
+# Just for a pretty message
+if [ "$GPU_TYPE" == "amd" ]; then
+    GPU_TYPE="AMD (ROCm) GPU"
+fi
+if [ "$GPU_TYPE" == "amd2" ]; then
+    GPU_TYPE="AMD (RDNA2 or older) GPU"
+fi
+if [ "$GPU_TYPE" == "amd3" ]; then
+    GPU_TYPE="AMD (RDNA3) GPU"
+fi
+if [ "$GPU_TYPE" == "intel" ]; then
+    GPU_TYPE="Intel (XPU) GPU"
+fi
+if [ "$GPU_TYPE" == "ipex" ]; then
+    GPU_TYPE="Intel (IPEX) GPU"
+fi
+if [ "$GPU_TYPE" == "nv" ]; then
+    GPU_TYPE="NVidia GPU"
+fi
+if [ "$GPU_TYPE" == "cpu" ]; then
+    GPU_TYPE="CPU only"
+fi
+echo "Installation completed for $GPU_TYPE."

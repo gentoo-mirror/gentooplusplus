@@ -13,6 +13,9 @@
 	<use>
 		<flag name="nvidia">build for NVidia GPU, cuda-based</flag>
 		<flag name="amd">build for AMD GPU, ROCM-based</flag>
+		<flag name="amd_mae">enable experimental memory efficient attention on some AMD GPUs</flag>
+		<flag name="rdna2">build for AMD GPU (together with amd flag), for 6700, 6600 and maybe other RDNA2 or older</flag>
+		<flag name="rdna3">build for AMD GPU (together with amd flag), for AMD 7600 and maybe other RDNA3 cards</flag>
 		<flag name="cpu">build for CPU-generation only</flag>
 		<flag name="comfyui">build the built-in ComfyUI backend. If unselected, you will have to manually install backend later on.</flag>
 		<flag name="intel">build for Intel GPU (XPU)

@@ -13,10 +13,13 @@ HOMEPAGE="https://swarmui.net/"
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="+systemd +desktop nvidia amd intel ipex cpu python_single_target_python3_11 python_single_target_python3_12 +comfyui"
+IUSE="+systemd +desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_11 python_single_target_python3_12 +comfyui"
 
 REQUIRED_USE="^^ ( python_single_target_python3_11 python_single_target_python3_12 )
-^^ ( nvidia amd intel ipex cpu )"
+^^ ( nvidia amd intel ipex cpu )
+rdna2? ( amd )
+rdna3? ( amd )
+"
 
 BEPEND="virtual/pkgconfig"
 
@@ -121,6 +124,12 @@ pkg_postinst() {
             GPU_TYPE=""
             if use amd; then
                 GPU_TYPE="amd"
+                if use rdna2; then
+                    GPU_TYPE="amd2"
+                fi
+                if use rdna3; then
+                    GPU_TYPE="amd3"
+                fi
             fi
             if use nvidia; then
                 GPU_TYPE="nv"
@@ -135,6 +144,11 @@ pkg_postinst() {
                 GPU_TYPE="cpu"
             fi
             sudo -u genai ./launchtools/comfy-install-linux.sh "${GPU_TYPE}"
+            if use amd_mae; then
+                sed -i "/import os/a os.environ\['TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL'\] = '1'" "./dlbackend/ComfyUI/main.py"
+                echo "args.use_pytorch_cross_attention = True
+" >> ./dlbackend/ComfyUI/comfy/cli_args.py
+            fi
             elog "Finished installing ComfyUI."
         else
             elog "ComfyUI already installed, skipping."
