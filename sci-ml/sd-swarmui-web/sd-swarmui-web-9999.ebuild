@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{10..13} )
 
 inherit systemd desktop xdg-utils python-single-r1
 
@@ -13,9 +13,9 @@ HOMEPAGE="https://swarmui.net/"
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="+systemd +desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_11 python_single_target_python3_12 +comfyui"
+IUSE="+systemd +desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 +comfyui"
 
-REQUIRED_USE="^^ ( python_single_target_python3_11 python_single_target_python3_12 )
+REQUIRED_USE="^^ ( python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 )
 ^^ ( nvidia amd intel ipex cpu )
 rdna2? ( amd )
 rdna3? ( amd )
@@ -143,7 +143,20 @@ pkg_postinst() {
             if use cpu; then
                 GPU_TYPE="cpu"
             fi
-            sudo -u genai ./launchtools/comfy-install-linux.sh "${GPU_TYPE}"
+            PYTHON_EXECUTABLE="python3.12"
+            if use python_single_target_python3_12; then
+                PYTHON_EXECUTABLE="python3.12"
+            fi
+            if use python_single_target_python3_13; then
+                PYTHON_EXECUTABLE="python3.13"
+            fi
+            if use python_single_target_python3_11; then
+                PYTHON_EXECUTABLE="python3.11"
+            fi
+            if use python_single_target_python3_10; then
+                PYTHON_EXECUTABLE="python3.10"
+            fi
+            sudo -u genai ./launchtools/comfy-install-linux.sh "${GPU_TYPE}" "${PYTHON_EXECUTABLE}"
             if use amd_mae; then
                 sed -i "/import os/a os.environ\['TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL'\] = '1'" "./dlbackend/ComfyUI/main.py"
                 echo "args.use_pytorch_cross_attention = True
