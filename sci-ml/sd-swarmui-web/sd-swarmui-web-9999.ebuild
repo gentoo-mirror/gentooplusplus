@@ -113,7 +113,7 @@ src_install() {
 pkg_postinst() {
     die() { echo "$*" 1>&2 ; exit 1; }
     cd "${INSTALL_DIR}"
-    gpasswd -a genai video
+    #gpasswd -a genai video
     elog "Installing dependencies..."
     elog "Installing dotnet."
     sudo -u genai ./launchtools/dotnet-install.sh --channel 8.0 --runtime aspnetcore  || die "Cannot install ASPnetCore"
