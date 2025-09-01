@@ -114,6 +114,17 @@ pkg_postinst() {
     die() { echo "$*" 1>&2 ; exit 1; }
     cd "${INSTALL_DIR}"
     #gpasswd -a genai video
+    CHECK_GENAI_UPTODATE=$(groups genai | grep video)
+    if [[ -z "${CHECK_GENAI_UPTODATE}" ]]; then
+        ewarn ""
+        ewarn ""
+        ewarn "!!! Please add user genai to group video: \"sudo gpasswd -a genai video\" !!!"
+        if use comfyui; then
+            ewarn "ComfyUI most probably won't install properly due to this issue, so it is recommended to add user as mentioned above to a group and then re-run installation again."
+        fi
+        ewarn ""
+        ewarn ""
+    fi
     elog "Installing dependencies..."
     elog "Installing dotnet."
     sudo -u genai ./launchtools/dotnet-install.sh --channel 8.0 --runtime aspnetcore  || die "Cannot install ASPnetCore"
