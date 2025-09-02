@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>donotspamme@example.com</email>
+		<name>eugeniusz-gienek</name>
+		<description>If wannah reach - use Github issues system please.</description>
+	</maintainer>
+	<stabilize-allarches/>
+	<upstream>
+		<remote-id type="github">ggml-org/llama.cpp</remote-id>
+		<bugs-to>https://github.com/ggml-org/llama.cpp/issues</bugs-to>
+		<changelog>https://github.com/ggml-org/llama.cpp/releases</changelog>
+		<doc>https://github.com/ggml-org/llama.cpp/wiki</doc>
+	</upstream>
+	<use>
+        <flag name="systemd">Create a systemd service "llama-cpp.service"</flag>
+        <flag name="dynamic-backends">In most cases, it is possible to build and use multiple backends at the same time. For example, you can build llama.cpp with both CUDA and Vulkan support by using the -DGGML_CUDA=ON -DGGML_VULKAN=ON options with CMake. At runtime, you can specify which backend devices to use with the --device option. To see a list of available devices, use the --list-devices option.
+Backends can be built as dynamic libraries that can be loaded dynamically at runtime. This allows you to use the same llama.cpp binary on different machines with different GPUs. To enable this feature, use the GGML_BACKEND_DL option when building.
+GGML_NATIVE ("cpu-native" flag) is not compatible with GGML_BACKEND_DL, if you want to use also native flag, consider using otherwise GGML_CPU_ALL_VARIANTS</flag>
+		<flag name="disable-arm-neon">Disable Arm Neon.
+Arm Neon is an advanced single instruction multiple data (SIMD) architecture extension for the Arm Cortex-A and Arm Cortex-R series of processors.
+Might help in case of CUDA related compilations errors: https://github.com/ggml-org/llama.cpp/issues/12826 </flag>
+		<flag name="utils">Build also llama.cpp utils (scripts) for performing operations on models.</flag>
+        <flag name="webgpu">The WebGPU backend relies on Dawn: https://dawn.googlesource.com/dawn</flag>
+        <flag name="android">Enable if you build for android</flag>
+		<flag name="msvc">Enable if you build with MSVC</flag>
+		<flag name="static">static build?</flag>
+		<flag name="cpu">ggml: enable CPU backend; if it is the only backend, please also select either "cpu-native" or "cpu-all-variants" - otherwise the package won't compile.</flag>
+		<flag name="cpu-native">ggml: enable CPU backend; please use together with cpu flag; it will add `-march=native` by itself. CPU_FLAGS_* consistency is expected to be user's problem </flag>
+        <flag name="cpu-all-variants">ggml: enable CPU backend; please use together with cpu flag; ggml: build all variants of the CPU backend (requires GGML_BACKEND_DL) </flag>
+		<flag name="hbm">ggml: use memkind for CPU HBM ( High Bandwidth Memory , check wikipedia.) ; a hardware-related feature</flag>
+		<flag name="accelerate">ggml: enable Accelerate framework</flag>
+		<flag name="blas">ggml: use BLAS; for using specific vendor check https://wiki.gentoo.org/wiki/Blas-lapack-switch</flag>
+		<flag name="blis">ggml: use BLIS ( https://github.com/flame/blis )</flag>
+		<flag name="llamafile">ggml: use LLAMAFILE</flag>
+		<flag name="cann">ggml: use CANN ; This provides NPU acceleration using the AI cores of your Ascend NPU.</flag>
+		<flag name="cuda">ggml: use CUDA ; in order for it to compile also tag .... "cpu" has to be selected, don't ask why. Use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: CMAKE_CUDA_ARCHITECTURES ( use next command to find native architecture: `nvidia-smi --query-gpu=compute_cap --format=csv | tail -n 1 | sed -e 's/\.//g'` ) ; GGML_CUDA_PEER_MAX_BATCH_SIZE ggml: max. batch size for using peer access, default: 128</flag>
+		<flag name="musa">ggml: use MUSA ; This provides GPU acceleration using a Moore Threads GPU.</flag>
+		<flag name="cuda-unified-memory">ggml: CUDA : unified memory: allow CUDA app use unified memory architecture (UMA) to share main memory between the CPU and integrated GPU </flag>
+		<flag name="cuda-force-mmq">ggml: use mmq kernels instead of cuBLAS</flag>
+		<flag name="cuda-force-cublas">ggml: always use cuBLAS instead of mmq kernels</flag>
+		<flag name="cuda-f16">ggml: use 16 bit floats for some calculations</flag>
+		<flag name="cuda-no-peer-copy">ggml: do not use peer to peer copies</flag>
+		<flag name="cuda-no-vmm">ggml: do not try to use CUDA VMM</flag>
+		<flag name="cuda-fa-all-quants">ggml: compile all quants for FlashAttention</flag>
+		<flag name="cuda-graphs">ggml: use CUDA graphs (llama.cpp only)</flag>
+		<flag name="hip">ggml: use HIP</flag>
+		<flag name="hip-graphs">ggml: use HIP graph, experimental, slow</flag>
+		<flag name="hip-no-vmm">ggml: do not try to use HIP VMM</flag>
+		<flag name="hip-uma">ggml: use HIP unified memory architecture : from docs/build.md : On Linux it is also possible to use unified memory architecture (UMA) to share main memory between the CPU and integrated GPU by setting -DGGML_HIP_UMA=ON. However, this hurts performance for non-integrated GPUs (but enables working with integrated GPUs).</flag>
+		<flag name="vulkan">ggml: use Vulkan ; use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables:  GGML_VULKAN_SHADERS_GEN_TOOLCHAIN "" "ggml: toolchain file for vulkan-shaders-gen"</flag>
+		<flag name="vulkan-check-results">ggml: run Vulkan op checks</flag>
+		<flag name="vulkan-debug">ggml: enable Vulkan debug output</flag>
+		<flag name="vulkan-memory-debug">ggml: enable Vulkan memory debug output</flag>
+		<flag name="vulkan-shader-debug-info">ggml: enable Vulkan shader debug info</flag>
+		<flag name="vulkan-perf">ggml: enable Vulkan perf output</flag>
+		<flag name="vulkan-validate">ggml: enable Vulkan validation</flag>
+		<flag name="vulkan-run-tests">ggml: run Vulkan tests</flag>
+		<flag name="kompute">ggml: use Kompute</flag>
+		<flag name="metal">ggml: use Metal; use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: ggml: metal minimum macOS version GGML_METAL_MACOSX_VERSION_MIN ; ggml: metal standard version (-std flag) GGML_METAL_STD</flag>
+		<flag name="metal-use-bf16">ggml: use bfloat if available</flag>
+		<flag name="metal-ndebug">ggml: disable Metal debugging</flag>
+		<flag name="metal-shader-debug">ggml: compile Metal with -fno-fast-math</flag>
+		<flag name="metal-embed-library">ggml: embed Metal library</flag>
+		<flag name="openmp">ggml: use OpenMP</flag>
+		<flag name="rpc">ggml: use RPC</flag>
+		<!-- <flag name="sycl">ggml: use SYCL ;   use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: GGML_SYCL_TARGET "INTEL" "ggml: sycl target device" ; GGML_SYCL_DEVICE_ARCH "" "ggml: sycl device architecture"</flag> -->
+		<!-- <flag name="sycl-f16">ggml: use 16 bit floats for sycl calculations</flag> -->
+		<!---->
+		<!-- <flag name="sycl-target-nvidia">sycl-target-nvidia</flag> -->
+		<!-- <flag name="sycl-target-amdgpu">sycl-target-amdgpu</flag> -->
+		<!-- <flag name="sycl-target-intelgpu">sycl-target-intelgpu</flag> -->
+		<!-- <flag name="sycl-via-openapi">sycl-via-openapi</flag> -->
+		<!-- <flag name="sycl-via-opemkl">sycl-via-opemkl</flag> -->
+        <!-- flag name="onemkl">Building through oneAPI compilers will make avx_vnni instruction set available for intel processors that do not support avx512 and avx512_vnni.</flag -->
+		<flag name="opencl">ggml: use OpenCL; This provides GPU acceleration through OpenCL on recent Adreno GPU.</flag>
+		<flag name="opencl-profiling">ggml: use OpenCL profiling (increases overhead)</flag>
+		<flag name="opencl-embed-kernels">ggml: embed kernels</flag>
+		<flag name="opencl-use-adreno-kernels">ggml: use optimized kernels for Adreno</flag>
+		<flag name="test">ggml: build tests; "llama: build tests"</flag>
+		<flag name="examples">ggml: build examples; "llama: build examples"</flag>
+		<flag name="server">ggml: build examples ; "llama: build server example"</flag>
+		<flag name="kleidiai">ggml: use kleidiai optimized kernels if applicable</flag>
+		
+		
+	</use>
+</pkgmetadata>

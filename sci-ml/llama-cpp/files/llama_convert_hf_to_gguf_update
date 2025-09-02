@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /opt/llama-cpp/
+source venv/bin/activate
+python convert_hf_to_gguf_update.py $@

@@ -1,0 +1,19 @@
+[Unit]
+Description=llama server
+After=network-online.target
+
+[Service]
+EnvironmentFile=/etc/llama-cpp/env.conf
+ExecStart=
+ExecStart=bash -c "/usr/bin/llama-server \
+    --host ${LLAMA_HOST}\
+    --port ${LLAMA_PORT}\
+    --model ${LLAMA_MODEL}\
+    ${LLAMA_ARGS}"
+User=genai
+Group=genai
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
