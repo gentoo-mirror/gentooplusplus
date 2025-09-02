@@ -16,6 +16,61 @@ dev-python/buildozer:android - Package for Android via dev-python/python-for-and
 dev-python/buildozer:ios - Package for iOS via dev-python/kivy-ios (currently broken)
 sci-ml/kohyas-gui:desktop - Create a "desktop" file (browser launcher) and add an icon.
 sci-ml/kohyas-gui:systemd - Create a systemd service "kohyas-gui.service"
+sci-ml/llama-cpp:accelerate - ggml: enable Accelerate framework
+sci-ml/llama-cpp:android - Enable if you build for android
+sci-ml/llama-cpp:blas - ggml: use BLAS; for using specific vendor check https://wiki.gentoo.org/wiki/Blas-lapack-switch
+sci-ml/llama-cpp:blis - ggml: use BLIS ( https://github.com/flame/blis )
+sci-ml/llama-cpp:cann - ggml: use CANN ; This provides NPU acceleration using the AI cores of your Ascend NPU.
+sci-ml/llama-cpp:cpu - ggml: enable CPU backend; if it is the only backend, please also select either "cpu-native" or "cpu-all-variants" - otherwise the package won't compile.
+sci-ml/llama-cpp:cpu-all-variants - ggml: enable CPU backend; please use together with cpu flag; ggml: build all variants of the CPU backend (requires GGML_BACKEND_DL)
+sci-ml/llama-cpp:cpu-native - ggml: enable CPU backend; please use together with cpu flag; it will add `-march=native` by itself. CPU_FLAGS_* consistency is expected to be user's problem
+sci-ml/llama-cpp:cuda - ggml: use CUDA ; in order for it to compile also tag .... "cpu" has to be selected, don't ask why. Use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: CMAKE_CUDA_ARCHITECTURES ( use next command to find native architecture: `nvidia-smi --query-gpu=compute_cap --format=csv | tail -n 1 | sed -e 's/\.//g'` ) ; GGML_CUDA_PEER_MAX_BATCH_SIZE ggml: max. batch size for using peer access, default: 128
+sci-ml/llama-cpp:cuda-f16 - ggml: use 16 bit floats for some calculations
+sci-ml/llama-cpp:cuda-fa-all-quants - ggml: compile all quants for FlashAttention
+sci-ml/llama-cpp:cuda-force-cublas - ggml: always use cuBLAS instead of mmq kernels
+sci-ml/llama-cpp:cuda-force-mmq - ggml: use mmq kernels instead of cuBLAS
+sci-ml/llama-cpp:cuda-graphs - ggml: use CUDA graphs (llama.cpp only)
+sci-ml/llama-cpp:cuda-no-peer-copy - ggml: do not use peer to peer copies
+sci-ml/llama-cpp:cuda-no-vmm - ggml: do not try to use CUDA VMM
+sci-ml/llama-cpp:cuda-unified-memory - ggml: CUDA : unified memory: allow CUDA app use unified memory architecture (UMA) to share main memory between the CPU and integrated GPU
+sci-ml/llama-cpp:disable-arm-neon - Disable Arm Neon. Arm Neon is an advanced single instruction multiple data (SIMD) architecture extension for the Arm Cortex-A and Arm Cortex-R series of processors. Might help in case of CUDA related compilations errors: https://github.com/ggml-org/llama.cpp/issues/12826
+sci-ml/llama-cpp:dynamic-backends - In most cases, it is possible to build and use multiple backends at the same time. For example, you can build llama.cpp with both CUDA and Vulkan support by using the -DGGML_CUDA=ON -DGGML_VULKAN=ON options with CMake. At runtime, you can specify which backend devices to use with the --device option. To see a list of available devices, use the --list-devices option. Backends can be built as dynamic libraries that can be loaded dynamically at runtime. This allows you to use the same llama.cpp binary on different machines with different GPUs. To enable this feature, use the GGML_BACKEND_DL option when building. GGML_NATIVE ("cpu-native" flag) is not compatible with GGML_BACKEND_DL, if you want to use also native flag, consider using otherwise GGML_CPU_ALL_VARIANTS
+sci-ml/llama-cpp:examples - ggml: build examples; "llama: build examples"
+sci-ml/llama-cpp:hbm - ggml: use memkind for CPU HBM ( High Bandwidth Memory , check wikipedia.) ; a hardware-related feature
+sci-ml/llama-cpp:hip - ggml: use HIP
+sci-ml/llama-cpp:hip-graphs - ggml: use HIP graph, experimental, slow
+sci-ml/llama-cpp:hip-no-vmm - ggml: do not try to use HIP VMM
+sci-ml/llama-cpp:hip-uma - ggml: use HIP unified memory architecture : from docs/build.md : On Linux it is also possible to use unified memory architecture (UMA) to share main memory between the CPU and integrated GPU by setting -DGGML_HIP_UMA=ON. However, this hurts performance for non-integrated GPUs (but enables working with integrated GPUs).
+sci-ml/llama-cpp:kleidiai - ggml: use kleidiai optimized kernels if applicable
+sci-ml/llama-cpp:kompute - ggml: use Kompute
+sci-ml/llama-cpp:llamafile - ggml: use LLAMAFILE
+sci-ml/llama-cpp:metal - ggml: use Metal; use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: ggml: metal minimum macOS version GGML_METAL_MACOSX_VERSION_MIN ; ggml: metal standard version (-std flag) GGML_METAL_STD
+sci-ml/llama-cpp:metal-embed-library - ggml: embed Metal library
+sci-ml/llama-cpp:metal-ndebug - ggml: disable Metal debugging
+sci-ml/llama-cpp:metal-shader-debug - ggml: compile Metal with -fno-fast-math
+sci-ml/llama-cpp:metal-use-bf16 - ggml: use bfloat if available
+sci-ml/llama-cpp:msvc - Enable if you build with MSVC
+sci-ml/llama-cpp:musa - ggml: use MUSA ; This provides GPU acceleration using a Moore Threads GPU.
+sci-ml/llama-cpp:opencl - ggml: use OpenCL; This provides GPU acceleration through OpenCL on recent Adreno GPU.
+sci-ml/llama-cpp:opencl-embed-kernels - ggml: embed kernels
+sci-ml/llama-cpp:opencl-profiling - ggml: use OpenCL profiling (increases overhead)
+sci-ml/llama-cpp:opencl-use-adreno-kernels - ggml: use optimized kernels for Adreno
+sci-ml/llama-cpp:openmp - ggml: use OpenMP
+sci-ml/llama-cpp:rpc - ggml: use RPC
+sci-ml/llama-cpp:server - ggml: build examples ; "llama: build server example"
+sci-ml/llama-cpp:static - static build?
+sci-ml/llama-cpp:systemd - Create a systemd service "llama-cpp.service"
+sci-ml/llama-cpp:test - ggml: build tests; "llama: build tests"
+sci-ml/llama-cpp:utils - Build also llama.cpp utils (scripts) for performing operations on models.
+sci-ml/llama-cpp:vulkan - ggml: use Vulkan ; use CMAKE_EXTRA_CACHE_FILE env variable (check https://gitweb.gentoo.org/repo/gentoo.git/tree/eclass/cmake.eclass ) to specify next variables: GGML_VULKAN_SHADERS_GEN_TOOLCHAIN "" "ggml: toolchain file for vulkan-shaders-gen"
+sci-ml/llama-cpp:vulkan-check-results - ggml: run Vulkan op checks
+sci-ml/llama-cpp:vulkan-debug - ggml: enable Vulkan debug output
+sci-ml/llama-cpp:vulkan-memory-debug - ggml: enable Vulkan memory debug output
+sci-ml/llama-cpp:vulkan-perf - ggml: enable Vulkan perf output
+sci-ml/llama-cpp:vulkan-run-tests - ggml: run Vulkan tests
+sci-ml/llama-cpp:vulkan-shader-debug-info - ggml: enable Vulkan shader debug info
+sci-ml/llama-cpp:vulkan-validate - ggml: enable Vulkan validation
+sci-ml/llama-cpp:webgpu - The WebGPU backend relies on Dawn: https://dawn.googlesource.com/dawn
 sci-ml/ollama:cpuonly - If using systemd, adjust the systemd service parameters to ignore the GPU and use only CPU.
 sci-ml/ollama:systemd - Create a systemd service "ollama.service"
 sci-ml/sd-swarmui-web:amd - build for AMD GPU, ROCM-based
