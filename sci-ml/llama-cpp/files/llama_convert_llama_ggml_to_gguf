@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /opt/llama-cpp/
+source venv/bin/activate
+python convert_llama_ggml_to_gguf.py $@
