@@ -1,13 +1,11 @@
-BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=install prepare unpack
+DEFINED_PHASES=install prepare
 DEPEND=acct-user/media acct-group/media >=net-libs/nodejs-20.9[npm] <sys-apps/yarn-2.0 >=sys-apps/yarn-1.0 >=dev-db/postgresql-10.0 >=dev-db/redis-6.0 >=media-video/ffmpeg-4.3[x264] dev-python/virtualenv dev-vcs/git net-misc/curl app-arch/unzip dev-lang/python dev-lang/python-exec www-servers/nginx[threads,aio]
 DESCRIPTION=PeerTube is a free, decentralized and federated video platform developed as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
 EAPI=8
 HOMEPAGE=https://joinpeertube.org/
-INHERIT=git-r3
+KEYWORDS=~amd64 ~arm ~arm64 ~x86
 LICENSE=AGPL-3.0
-PROPERTIES=live
 RDEPEND=acct-user/media acct-group/media
 SLOT=0
-_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
+SRC_URI=https://github.com/Chocobozzz/PeerTube/releases/download/v7.3.0/peertube-v7.3.0.tar.xz -> peertube-7.3.0.gh.tar.xz
 _md5_=127d98f4cdf41225cf1d2f0c73b26070
