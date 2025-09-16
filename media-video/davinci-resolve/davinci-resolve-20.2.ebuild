@@ -27,7 +27,7 @@ SRC_URI="${ARC_NAME}"
 LICENSE="all-rights-reserved"
 KEYWORDS="-* ~amd64"
 SLOT="0"
-IUSE="doc udev +system-glib appimage"
+IUSE="doc udev +system-glib"
 
 RESTRICT="strip mirror bindist fetch userpriv"
 
@@ -66,7 +66,6 @@ DEPEND="
     dev-libs/xmlsec
 	sys-fs/fuse[suid]
 	udev? ( virtual/udev )
-    appimage? ( net-misc/zsync )
 	virtual/opencl
 	x11-misc/xdg-user-dirs
 	${RDEPEND}
