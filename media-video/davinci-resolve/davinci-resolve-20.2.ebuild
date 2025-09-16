@@ -203,6 +203,7 @@ pkg_postinst() {
 	xdg_pkg_postinst
 	udev_reload
     mkdir -p "/var/BlackmagicDesign/DaVinci Resolve"
+    chmod -R 777 "/var/BlackmagicDesign"
     mkdir -p "${FLOG_DIR}"
     chmod 777 "${FLOG_DIR}"
     ln -s "${FLOG_DIR}" "${INSTALL_DIR}"/logs
