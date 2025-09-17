@@ -106,7 +106,9 @@ src_install() {
         sed -i 's/#export CUDA_VISIBLE_DEVICES/export CUDA_VISIBLE_DEVICES/' "${D}${INSTALL_DIR}/comfyui_runner.sh"
     fi
     if use cpu; then
-        sed -i 's/RUN_STR=""/RUN_STR="--cpu"/' "${D}${INSTALL_DIR}/comfyui_runner.sh"
+        sed -i 's/___default_args___/ --cpu/' "${D}${INSTALL_DIR}/comfyui_runner.sh"
+    else
+        sed -i 's/___default_args___//' "${D}${INSTALL_DIR}/comfyui_runner.sh"
     fi
     PYTHON_EXECUTABLE="python3.12"
     if use python_single_target_python3_13; then
