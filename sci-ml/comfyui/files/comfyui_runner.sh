@@ -1,7 +1,7 @@
 #!/bin/bash
 
 die() { echo "$*" 1>&2 ; exit 1; }
-#CONFIG_FILE="/etc/comfyui/env.conf"
+CONFIG_FILE="/etc/comfyui/env.conf"
 #export CUDA_VISIBLE_DEVICES=-1
 export PATH="${PATH}:/opt/cuda/bin/"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/cuda/lib64/"
@@ -379,7 +379,7 @@ fi
 source venv/bin/activate
 
 if [ -z "${RUN_STR}" ]; then
-    __python ./main.py
+    __python ./main.py___default_args___
 else
     __python ./main.py "${RUN_STR}"
 fi
