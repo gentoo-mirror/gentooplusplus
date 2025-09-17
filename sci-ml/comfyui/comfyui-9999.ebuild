@@ -15,7 +15,7 @@ SLOT="0"
 
 IUSE="
 systemd
-+desktop
+desktop
 nvidia
 amd
 intel
