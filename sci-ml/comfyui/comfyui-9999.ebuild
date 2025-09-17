@@ -16,7 +16,7 @@ SLOT="0"
 IUSE="
 systemd
 +desktop
-+nvidia
+nvidia
 amd
 intel
 ipex
@@ -26,7 +26,7 @@ rdna3
 amd_mae
 python_single_target_python3_10
 python_single_target_python3_11
-+python_single_target_python3_12
+python_single_target_python3_12
 python_single_target_python3_13
 "
 
