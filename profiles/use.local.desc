@@ -14,6 +14,16 @@ dev-python/Kivy:pytest - Enable downstream "kivy.tests" Kivy app testing via dev
 dev-python/Kivy:rst - Enable reStructuredText (reST) support via dev-python/docutils
 dev-python/buildozer:android - Package for Android via dev-python/python-for-android (recommended)
 dev-python/buildozer:ios - Package for iOS via dev-python/kivy-ios (currently broken)
+sci-ml/comfyui:amd - build for AMD GPU, ROCM-based
+sci-ml/comfyui:amd_mae - enable experimental memory efficient attention on some AMD GPUs
+sci-ml/comfyui:cpu - build for CPU-generation only
+sci-ml/comfyui:desktop - Create a "desktop" file (browser launcher) and add an icon.
+sci-ml/comfyui:intel - build for Intel GPU (XPU) Compatible Hardware ( https://docs.pytorch.org/docs/main/notes/get_start_xpu.html ): Intel® Arc A-Series Graphics (CodeName: Alchemist); Intel® Arc B-Series Graphics (CodeName: Battlemage); Intel® Core™ Ultra Processors with Intel® Arc™ Graphics (CodeName: Meteor Lake-H); Intel® Core™ Ultra Desktop Processors (Series 2) with Intel® Arc™ Graphics (CodeName: Lunar Lake); Intel® Core™ Ultra Mobile Processors (Series 2) with Intel® Arc™ Graphics (CodeName: Arrow Lake-H); Intel® Data Center GPU Max Series (CodeName: Ponte Vecchio)
+sci-ml/comfyui:ipex - build for Intel GPU (IPEX) Compatible Hardware: Intel® Arc™ A-Series Graphics (Intel® Arc™ A770 [Verified], Intel® Arc™ A750, Intel® Arc™ A580, Intel® Arc™ A770M, Intel® Arc™ A730M, Intel® Arc™ A550M); Intel® Arc™ B-Series Graphics (Intel® Arc™ B580 [Verified], Intel® Arc™ B570); Intel® Data Center GPU Max Series [Verified]; For GPUs newer than Intel® Core™ Ultra Processors with Intel® Arc™ Graphics (Meteor Lake) or Intel® Arc™ A-Series Graphics that aren't listed, please check the AOT documentation ( https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-0/ahead-of-time-compilation.html ) to see if it is supported. If so, follow instructions in the source section above to compile from source.
+sci-ml/comfyui:nvidia - build for NVidia GPU, cuda-based
+sci-ml/comfyui:rdna2 - build for AMD GPU (together with amd flag), for 6700, 6600 and maybe other RDNA2 or older
+sci-ml/comfyui:rdna3 - build for AMD GPU (together with amd flag), for AMD 7600 and maybe other RDNA3 cards
+sci-ml/comfyui:systemd - Create a systemd service "comfyui.service"
 sci-ml/kohyas-gui:desktop - Create a "desktop" file (browser launcher) and add an icon.
 sci-ml/kohyas-gui:systemd - Create a systemd service "kohyas-gui.service"
 sci-ml/llama-cpp:accelerate - ggml: enable Accelerate framework

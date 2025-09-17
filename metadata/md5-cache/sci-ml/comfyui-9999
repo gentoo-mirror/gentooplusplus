@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=config install postinst postrm prepare prerm setup unpack
+DEPEND=acct-user/genai acct-group/genai dev-python/virtualenv dev-vcs/git net-misc/curl net-misc/wget nvidia? ( >=dev-util/nvidia-cuda-toolkit-12.8.0 dev-libs/cudnn x11-drivers/nvidia-drivers )
+DESCRIPTION=ComfyUI - The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
+EAPI=8
+HOMEPAGE=https://github.com/comfyanonymous/ComfyUI
+INHERIT=systemd desktop xdg-utils python-single-r1 git-r3
+IUSE=systemd desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
+LICENSE=GPL-3.0
+PROPERTIES=live
+RDEPEND=acct-user/genai acct-group/genai
+REQUIRED_USE=^^ ( python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 ) ^^ ( nvidia amd intel ipex cpu ) rdna2? ( amd ) rdna3? ( amd )
+SLOT=0
+_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	multiprocessing	1e32df7deee68372153dca65f4a7c21f	python-utils-r1	b7eb9c3a6dc6662368634584aab44a2c	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=bc75b1c989df9c94f1c2ae5b8b0604ea
