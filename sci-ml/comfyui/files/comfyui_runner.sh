@@ -256,7 +256,7 @@ else
     if [ "${COMFYUI_CACHE_CLASSIC}" != "-" ]; then
         RUN_STR="${RUN_STR} --cache-classic"
     fi
-    if [ "${COMFYUI_CACHE_NONE}" != "-"]; then
+    if [ "${COMFYUI_CACHE_NONE}" != "-" ]; then
         RUN_STR="${RUN_STR} --cache-none"
     fi
     if [ "${COMFYUI_CACHE_LRU}" != "-" ]; then
@@ -379,7 +379,7 @@ fi
 source venv/bin/activate
 
 if [ -z "${RUN_STR}" ]; then
-    __python ./main.py___default_args___
+    bash -c "__python ./main.py___default_args___"
 else
-    __python ./main.py "${RUN_STR}"
+    bash -c "__python ./main.py ${RUN_STR}"
 fi
