@@ -1,11 +1,11 @@
 BDEPEND=virtual/pkgconfig
-DEFINED_PHASES=install postinst postrm prepare prerm setup
+DEFINED_PHASES=config install postinst postrm prepare prerm setup
 DEPEND=acct-user/genai acct-group/genai dev-python/virtualenv dev-vcs/git net-misc/curl net-misc/wget nvidia? ( >=dev-util/nvidia-cuda-toolkit-12.8.0 dev-libs/cudnn x11-drivers/nvidia-drivers )
 DESCRIPTION=Stable Diffusion SwarmUI web application
 EAPI=8
 HOMEPAGE=https://swarmui.net/
 INHERIT=systemd desktop xdg-utils python-single-r1
-IUSE=+systemd +desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 +comfyui python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
+IUSE=systemd desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 +comfyui python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
 KEYWORDS=~amd64 ~arm ~arm64 ~x86
 LICENSE=MIT
 RDEPEND=acct-user/genai acct-group/genai
@@ -13,4 +13,4 @@ REQUIRED_USE=^^ ( python_single_target_python3_10 python_single_target_python3_1
 SLOT=0
 SRC_URI=https://github.com/mcmonkeyprojects/SwarmUI/archive/refs/tags/0.9.6-Beta.tar.gz -> sd-swarmui-web-0.9.6.gh.tar.gz
 _eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	multiprocessing	1e32df7deee68372153dca65f4a7c21f	python-utils-r1	b7eb9c3a6dc6662368634584aab44a2c	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57
-_md5_=9acc8c57f5af35f6dacd0c7096d42de7
+_md5_=49414e8d832552a9d12e4ffb0d16ba96
