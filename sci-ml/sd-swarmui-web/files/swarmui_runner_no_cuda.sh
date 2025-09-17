@@ -125,5 +125,5 @@ else
         sed -i 's,OverrideWelcomeMessage: \\x,OverrideWelcomeMessage: <h2>Welcome to SwarmUI - Stable Diffusion generator.<\/h2> <p>General config file is located here: \/etc\/swarmui\/env.conf<\/p>,' "Data/Settings.fds"
         sed -i 's,CheckForUpdates: true,CheckForUpdates: false,' "Data/Settings.fds"
     fi
-    ./launch-linux.sh "${RUN_STR}"
+    bash -c "./launch-linux.sh ${RUN_STR}"
 fi

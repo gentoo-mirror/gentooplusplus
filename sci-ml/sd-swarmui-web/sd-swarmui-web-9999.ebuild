@@ -13,7 +13,23 @@ HOMEPAGE="https://swarmui.net/"
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="+systemd +desktop nvidia amd intel ipex cpu rdna2 rdna3 amd_mae python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 +comfyui"
+IUSE="
+systemd
+desktop
+nvidia
+amd
+intel
+ipex
+cpu
+rdna2
+rdna3
+amd_mae
+python_single_target_python3_10
+python_single_target_python3_11
+python_single_target_python3_12
+python_single_target_python3_13
++comfyui
+"
 
 REQUIRED_USE="^^ ( python_single_target_python3_10 python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 )
 ^^ ( nvidia amd intel ipex cpu )
@@ -108,9 +124,14 @@ src_install() {
     if use systemd; then
         systemd_newunit "${FILESDIR}"/swarmui.service swarmui.service
     fi
+    chown -R genai:genai "${D}${INSTALL_DIR}"
 }
 
 pkg_postinst() {
+    pkg_config
+}
+
+pkg_config() {
     die() { echo "$*" 1>&2 ; exit 1; }
     cd "${INSTALL_DIR}"
     #gpasswd -a genai video
