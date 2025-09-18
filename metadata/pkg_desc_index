@@ -23,6 +23,7 @@ media-gfx/orcaslicer-bin 2.2.0 2.3.0: Orca Slicer is a free 3D printing slicer c
 media-gfx/ultimaker-cura 9999: Ultimaker Cura - slicer for 3D printing
 media-video/davinci-resolve 20.2: Professional A/V post-production software suite
 media-video/video2x 6.4.0 9999: A machine learning-based video super resolution and frame interpolation framework
+media-video/video2x-x11 6.4.0 9999: The Qt6 graphical user interface for Video2X.
 sci-ml/comfyui 0.3.59 9999: ComfyUI - The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
 sci-ml/kohyas-gui 0.1.2 0.1.3 9999: Kohya's GUI Web application
 sci-ml/llama-cpp 0.6335 9999: Llama.cpp - LLM inference in C/C++.
