@@ -27,12 +27,12 @@ media-video/video2x-x11 6.4.0 9999: The Qt6 graphical user interface for Video2X
 sci-ml/comfyui 0.3.59 9999: ComfyUI - The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
 sci-ml/kohyas-gui 0.1.2 0.1.3 9999: Kohya's GUI Web application
 sci-ml/llama-cpp 0.6335 9999: Llama.cpp - LLM inference in C/C++.
-sci-ml/ollama 0.9.6 0.11.6 0.11.8 0.11.10: Ollama - get up and running with large language models.
-sci-ml/ollama-amd 0.9.6 0.11.6 0.11.8 0.11.10: Ollama - get up and running with large language models - additional amd package
+sci-ml/ollama 0.9.6 0.11.6 0.11.8 0.11.10 0.12.0: Ollama - get up and running with large language models.
+sci-ml/ollama-amd 0.9.6 0.11.6 0.11.8 0.11.10 0.12.0: Ollama - get up and running with large language models - additional amd package
 sci-ml/sd-swarmui-web 0.9.6 0.9.7 9999: Stable Diffusion SwarmUI web application
 sys-kernel/gasket-driver 9999: The Coral Gasket Driver allows usage of the Coral EdgeTPU on Linux systems
 www-misc/funkwhale 1.4.1 9999: Funkwhale is a self-hosted, modern, free and open-source music server, heavily inspired by Grooveshark.
 www-misc/kiwix-tools 3.7.0: The Kiwix tools is a collection of Kiwix related command line tools.
-www-misc/open-webui 0.6.25 0.6.26 0.6.28 9999: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. It supports various LLM runners like Ollama and OpenAI-compatible APIs, with built-in inference engine for RAG, making it a powerful AI deployment solution.
+www-misc/open-webui 0.6.25 0.6.26 0.6.28 0.6.30 9999: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. It supports various LLM runners like Ollama and OpenAI-compatible APIs, with built-in inference engine for RAG, making it a powerful AI deployment solution.
 www-misc/peertube 7.2.3 7.3.0 9999: PeerTube is a free, decentralized and federated video platform developed as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
 x11-misc/xfe 1.44 1.45 1.46 2.0 2.0.1 2.1 2.1.1: MS-Explorer-like minimalist file manager for X

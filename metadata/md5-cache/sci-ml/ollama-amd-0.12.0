@@ -1,0 +1,11 @@
+DEFINED_PHASES=install prepare
+DEPEND=acct-user/genai acct-group/genai dev-vcs/git net-misc/curl net-misc/wget sci-ml/ollama
+DESCRIPTION=Ollama - get up and running with large language models - additional amd package
+EAPI=8
+HOMEPAGE=https://ollama.com/
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=acct-user/genai acct-group/genai
+SLOT=0
+SRC_URI=https://github.com/ollama/ollama/releases/download/v0.12.0/ollama-linux--rocm.tgz -> ollama-amd-0.12.0.gh.tgz
+_md5_=431df6a4558f0ee6320cde6459fde410

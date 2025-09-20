@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=install postinst postrm prepare prerm setup
+DEPEND=acct-user/genai acct-group/genai net-libs/nodejs[npm] dev-python/virtualenv dev-vcs/git net-misc/curl dev-lang/python ollama? ( sci-ml/ollama )
+DESCRIPTION=Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. It supports various LLM runners like Ollama and OpenAI-compatible APIs, with built-in inference engine for RAG, making it a powerful AI deployment solution.
+EAPI=8
+HOMEPAGE=https://openwebui.com/
+INHERIT=systemd python-single-r1
+IUSE=+systemd +ollama python_single_target_python3_11 python_single_target_python3_12
+KEYWORDS=~amd64 ~arm ~arm64 ~x86
+LICENSE=BSD-3.0
+RDEPEND=acct-user/genai acct-group/genai
+REQUIRED_USE=^^ ( python_single_target_python3_11 python_single_target_python3_12 )
+SLOT=0
+SRC_URI=https://github.com/open-webui/open-webui/archive/refs/tags/v0.6.30.tar.gz -> open-webui-0.6.30.gh.tar.gz
+_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	multiprocessing	1e32df7deee68372153dca65f4a7c21f	python-utils-r1	b7eb9c3a6dc6662368634584aab44a2c	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57
+_md5_=a3f42ca1f96899314d6168d2c0c74582
