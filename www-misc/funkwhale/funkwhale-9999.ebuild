@@ -15,7 +15,7 @@ SLOT="0"
 
 IUSE="+systemd +nginx apache python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13"
 
-REQUIRED_USE="^^ ( python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13)"
+REQUIRED_USE="^^ ( python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 )"
 
 BEPEND="virtual/pkgconfig"
 
