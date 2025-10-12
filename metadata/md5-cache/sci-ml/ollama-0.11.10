@@ -12,5 +12,5 @@ RDEPEND=acct-user/genai acct-group/genai
 REQUIRED_USE=cpuonly? ( systemd )
 SLOT=0
 SRC_URI=https://github.com/ollama/ollama/releases/download/v0.11.10/ollama-linux-.tgz -> ollama-0.11.10.gh.tgz
-_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	systemd	a964c0cbe818b5729da1dbfcee5be861	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
 _md5_=cf7736691b1572db17a4ffcc68d92fdc
